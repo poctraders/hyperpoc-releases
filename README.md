@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 1.1.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 1.1 - Manual.pdf` | El manual completo, 40 páginas con capturas. |
-| `hyperpoc 1.1.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 1.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 1.2 - Manual.pdf` | El manual completo, 40 páginas con capturas. |
+| `hyperpoc 1.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-704E5D5AEF8801E3E54CE010C38058995323BC9655BD16AE637DA0DE5222F20F
+25C2B024AD3B36B73EAC66FDC26F5BF57D951AD08108141791D1C56C55F4ECB0
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 1.1.exe" SHA256
+certutil -hashfile "hyperpoc 1.2.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 1.1.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 1.2.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,33 +78,29 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 1.1
+## Novedades de la 1.2
 
 ```
-1.1  (01/08/2026)
-  ARREGLADO, y no es cosmetico: el aviso que sale al conectar decia "Tu cuenta de
-  Hyperliquid siguio operando SOLA con NinjaTrader desconectado". Esa frase afirmaba
-  una causa que el programa no puede conocer, y el dia que se destapo era ademas
-  FALSA: la cuenta habia ejecutado 17 ordenes con NinjaTrader cerrado y no las mando
-  este programa -- las mando una SEGUNDA API wallet desde otro ordenador. Quien lo
-  leyo entendio lo unico que se podia entender: que el programa operaba por su cuenta.
-  Ahora el aviso dice lo que se sabe: QUE ejecuto Hyperliquid, que esto NO sale de
-  aqui (con la conexion cerrada no sale ni una peticion), y las dos unicas cosas de
-  las que puede venir -- ordenes que ya tenias puestas alli, u otro ordenador con
-  permiso para firmar en tu cuenta.
+1.2  (01/08/2026)
+  ES LA MISMA APLICACION QUE LA 1.1, y conviene decirlo claro: mismo motor, mismos
+  complementos, mismo comportamiento. No hay ningun arreglo nuevo que buscar.
 
-  NUEVO: en cada conexion se te dice CUANTAS API wallets pueden firmar en tu cuenta.
-  Una cuenta de Hyperliquid admite varias a la vez, cada una viviendo en un sitio
-  distinto, y todas firman igual. Si hay mas de una, sale con sus nombres en Control
-  Center > pestana Log. Tener dos es normal si usas dos ordenadores; lo que no es
-  normal es enterarte el dia que ves un movimiento que no reconoces. Y si ahi aparece
-  una que no es tuya, revocala: en Hyperliquid, More > API.
+  QUE CAMBIA ENTONCES: el paquete entero -- instalador, manual y este fichero -- se ha
+  construido de una sola vez y lleva UN solo numero y UN solo hash. En la 1.1 el manual
+  se amplio despues de haber construido el instalador, y aunque el .exe no cambio ni un
+  byte, quedaban dos contenidos distintos bajo el mismo numero. Eso es exactamente lo
+  que hace que un dia el hash que anuncia el README no sea el del archivo que tienes al
+  lado, y que quien lo comprueba concluya que el archivo viene manipulado.
 
-  NUEVO: "Acerca de", la ultima entrada del menu. El logotipo, el copyright, LA
-  VERSION que estas usando y dos enlaces que se pulsan: www.poctraders.com y
-  info@poctraders.com. La version no es adorno: es lo primero que hace falta saber
-  para poder ayudarte, y hasta ahora habia que ir a buscarla a "Aplicaciones
-  instaladas" de Windows.
+  SI VIENES DE LA 1.1: no tienes que hacer nada. Si aun asi la instalas, se instala
+  encima sin tocar tu configuracion ni tu clave.
+
+  SI VIENES DE LA 1.0 O DE UNA 0.x: aqui esta todo lo que trajo la 1.1 -- el aviso al
+  reconectar ya no dice que tu cuenta "siguio operando sola" (afirmaba una causa que el
+  programa no puede conocer), se te dice en cada conexion cuantas API wallets pueden
+  firmar en tu cuenta, y hay un "Acerca de" al final del menu con la version, el
+  contacto y el copyright. El manual explica ademas de donde se bajan las versiones
+  nuevas y como mirar la que tienes.
 ```
 
 ---
