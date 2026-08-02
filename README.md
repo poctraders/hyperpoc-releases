@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 1.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 1.2 - Manual.pdf` | El manual completo, 40 páginas con capturas. |
-| `hyperpoc 1.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 1.2.1.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 1.2.1 - Manual.pdf` | El manual completo, 48 páginas con capturas. |
+| `hyperpoc 1.2.1.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-25C2B024AD3B36B73EAC66FDC26F5BF57D951AD08108141791D1C56C55F4ECB0
+68898BAB5C425D974ECCA3BED4BD981959242A56B7B05CC442325BA445F3EF97
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 1.2.exe" SHA256
+certutil -hashfile "hyperpoc 1.2.1.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 1.2.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 1.2.1.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,29 +78,28 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 1.2
+## Novedades de la 1.2.1
 
 ```
-1.2  (01/08/2026)
-  ES LA MISMA APLICACION QUE LA 1.1, y conviene decirlo claro: mismo motor, mismos
-  complementos, mismo comportamiento. No hay ningun arreglo nuevo que buscar.
+1.2.1  (02/08/2026)
+  PRIMERA VERSION DE TRES DIGITOS, y es a proposito: el tercer digito significa "cambio
+  menor". El programa es EL MISMO que la 1.2 -- mismo motor, mismos complementos, mismo
+  comportamiento. Lo que cambia esta entero en el manual.
 
-  QUE CAMBIA ENTONCES: el paquete entero -- instalador, manual y este fichero -- se ha
-  construido de una sola vez y lleva UN solo numero y UN solo hash. En la 1.1 el manual
-  se amplio despues de haber construido el instalador, y aunque el .exe no cambio ni un
-  byte, quedaban dos contenidos distintos bajo el mismo numero. Eso es exactamente lo
-  que hace que un dia el hash que anuncia el README no sea el del archivo que tienes al
-  lado, y que quien lo comprueba concluya que el archivo viene manipulado.
+  NUEVO EN EL MANUAL: un apendice A, "Ordenes y apalancamiento", que contesta desde cero
+  la pregunta que mas dinero cuesta equivocar: cuando escribo 12 y le doy a comprar,
+  cuanto dinero estoy metiendo de verdad. Explica que aqui la cantidad son DOLARES y no
+  contratos ni lotes; por que hay un minimo de 10 $; por que a veces pides 12 $ y entran
+  11,68 $ o 14,99 $ (el escalon de cada mercado, con una tabla de diez mercados reales);
+  y sobre todo el malentendido caro: EL APALANCAMIENTO NO MULTIPLICA TU ORDEN. Poner x4
+  no convierte 12 $ en 48 $ -- lo que hace es retener menos fianza y subirte el techo.
+  Lleva tablas de apalancamiento maximo por mercado de las dos cuentas (cripto por un
+  lado; bolsa, indices, divisas y materias primas por otro), la diferencia entre Cross e
+  Isolated, tres ejemplos completos y una chuleta final.
 
-  SI VIENES DE LA 1.1: no tienes que hacer nada. Si aun asi la instalas, se instala
-  encima sin tocar tu configuracion ni tu clave.
-
-  SI VIENES DE LA 1.0 O DE UNA 0.x: aqui esta todo lo que trajo la 1.1 -- el aviso al
-  reconectar ya no dice que tu cuenta "siguio operando sola" (afirmaba una causa que el
-  programa no puede conocer), se te dice en cada conexion cuantas API wallets pueden
-  firmar en tu cuenta, y hay un "Acerca de" al final del menu con la version, el
-  contacto y el copyright. El manual explica ademas de donde se bajan las versiones
-  nuevas y como mirar la que tienes.
+  SI VIENES DE LA 1.2: no hace falta que instales nada para leerlo -- el manual en PDF se
+  descarga suelto desde la pagina de descargas. Si aun asi instalas, se instala encima
+  sin tocar tu configuracion ni tu clave.
 ```
 
 ---
