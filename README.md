@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 1.3.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 1.3 - Manual.pdf` | El manual completo, 0 páginas con capturas. |
-| `hyperpoc 1.3.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 1.3.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 1.3.2 - Manual.pdf` | El manual completo, 50 páginas con capturas. |
+| `hyperpoc 1.3.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-E0DB6462496BC673F0FD95100A46D5C0EE1FA4F2F440D98987C5764833F95F75
+3AEFD5CB296C47FCA48646969DC0F0E7E423003F03B03A917667D3AF94ABC041
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 1.3.exe" SHA256
+certutil -hashfile "hyperpoc 1.3.2.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 1.3.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 1.3.2.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,40 +78,20 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 1.3
+## Novedades de la 1.3.2
 
 ```
-1.3  (02/08/2026)
-  TE AVISA CUANDO HAY UNA VERSION NUEVA. Hasta ahora, enterarse dependia de que a alguien
-  se le ocurriera mirar la pagina de descargas. El 01/08/2026 ya paso: un ordenador con la
-  0.2.1 y otro con la 1.2, meses de arreglos de diferencia, y nada en pantalla que lo
-  dijera. Un fallo ya corregido que te sigue pasando porque nadie te dijo que estaba
-  corregido es un fallo que sigue vivo.
+1.3.2  (02/08/2026)
+  AHORA SI SE CIERRA NINJATRADER al pulsar "Descargar ahora". En la 1.3.1 ya encontraba su
+  ventana principal, pero al cerrarla fallaba con "the calling thread cannot access this
+  object because a different thread owns it": en NinjaTrader CADA VENTANA corre en su
+  propio hilo, y hay que pedirle el cierre a la ventana por su hilo, no por el de la
+  aplicacion. Resultado: aceptabas cerrar, se abria la pagina de descarga... y NinjaTrader
+  seguia ahi, con sus ficheros en uso y el instalador sin poder sustituirlos.
 
-  COMO FUNCIONA: al abrir NinjaTrader, UNA vez por sesion y en segundo plano, se le
-  pregunta a GitHub cual es la ultima version publicada. Si la tuya es mas vieja, sale una
-  ventana con la version que tienes, la que hay, un enlace "pincha aqui" y tres salidas:
-
-    · Descargar ahora        abre la pagina de descargas y CIERRA NinjaTrader (el
-                             instalador no puede sustituir los ficheros con NT abierto).
-                             Tus posiciones y ordenes NO se tocan: viven en Hyperliquid.
-    · Recordarmelo mas tarde no anota nada; vuelve a salir en el proximo arranque.
-    · Descartar esta version no vuelve a mencionar ESA. Si sale una posterior, si avisa:
-                             descartar una version no es apagar el aviso para siempre.
-
-  LO QUE **NO** HACE: no descarga ni ejecuta nada. Abre la pagina en tu navegador y ya.
-  Un instalador de 21 MB bajado y lanzado solo, sin que nadie vea de donde viene ni
-  compruebe el hash, es justo la comodidad por la que luego se cuelan cosas. Bajas tu,
-  comparas el SHA256 que anuncia la pagina y ejecutas tu.
-
-  SI NO HAY RED, O GITHUB NO CONTESTA: no sale nada. Ni un aviso, ni un error. Queda
-  anotado en el registro y punto. Una ventana de "no he podido comprobar si hay
-  actualizaciones" es ruido que no puedes accionar, y encima entrena a cerrar las ventanas
-  de esta aplicacion sin leerlas -- que es lo que se acaba de arreglar en la 1.2.2 con el
-  aviso de caducidad.
-
-  Esta consulta va a GitHub, NO a Hyperliquid: abrir NinjaTrader sigue sin conectar con el
-  exchange ni tocar tu cuenta.
+  Este fallo -- y el de la 1.3.1 -- salieron pulsando el boton de verdad, no leyendo el
+  codigo. Las dos veces el aviso "funcionaba" en todo salvo en lo unico que tenia que
+  hacer al final.
 ```
 
 ---
