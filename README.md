@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 1.2.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 1.2.2 - Manual.pdf` | El manual completo, 48 páginas con capturas. |
-| `hyperpoc 1.2.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 1.2.3.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 1.2.3 - Manual.pdf` | El manual completo, 48 páginas con capturas. |
+| `hyperpoc 1.2.3.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-9FBE6FC57AFD0F4E75BB9272118B2BA427EC9EDA568F8AC0AAD9340F1AD26EB5
+DBC631DC5FBD188284F25B9199783592B3861462784E9B9B1C9C6CFAC69CFAC5
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 1.2.2.exe" SHA256
+certutil -hashfile "hyperpoc 1.2.3.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 1.2.2.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 1.2.3.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,33 +78,23 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 1.2.2
+## Novedades de la 1.2.3
 
 ```
-1.2.2  (02/08/2026)
-  EL AVISO DE CADUCIDAD DEJA DE DAR LA LATA. Hasta ahora, la ventana emergente que
-  recuerda que tu API wallet caduca salia al conectar durante los ULTIMOS 30 DIAS. Como
-  una API wallet dura 180 dias, eso son decenas de arranques seguidos con el mismo
-  cartel -- y un cartel que sale treinta veces se cierra sin leerlo, justo para que el
-  dia que de verdad importa ya no lo lea nadie.
+1.2.3  (02/08/2026)
+  SE COMPORTA IGUAL QUE LA 1.2.2, y el numero existe por una razon que conviene dejar
+  escrita. El ajuste de "la caducidad solo se busca y solo se enseña con la conexion
+  abierta" se pidio cuando la 1.2.2 ya estaba construida e instalada pero todavia no
+  publicada, y viajo dentro de ella sin estrenar numero propio.
 
-  AHORA: la ventana emergente sale SOLO cuando quedan 7 DIAS O MENOS (y sigue saliendo
-  una sola vez por sesion). El resto del tiempo no interrumpe a nadie.
+  La regla de esta aplicacion es que CADA cambio menor estrena numero, y no admite la
+  excepcion de "es que el anterior aun no habia salido": el momento en que se publica algo
+  no cambia lo que ese algo hace. Asi que el ajuste tiene el suyo.
 
-  Y PARA NO PERDER EL DATO, esta siempre a mano: "Acerca de" (la ultima entrada del menu
-  Hyperliquid Poctraders) enseña ahora los dias que faltan, con la fecha exacta. En gris
-  mientras hay margen; en ambar la ultima semana, con el recordatorio de renovarla; y en
-  rojo si ya caduco o si Hyperliquid la revoco. La linea de la pestaña Log del Control
-  Center sigue saliendo en CADA conexion, igual que antes.
-
-  Esa ventana NO consulta nada al abrirse ni pide nada a la red: enseña lo que ya trajo la
-  conexion en curso, asi que se abre al instante.
-
-  Y SOLO CON LA CONEXION ABIERTA. Desconectado no enseña ninguna fecha: dice "conecta con
-  Hyperliquid para ver cuanto le queda". La caducidad es un dato de Hyperliquid, no de este
-  programa, y entre una sesion y otra puedes haber renovado o revocado la clave desde el
-  movil, desde la web o desde otro ordenador. Una fecha vieja enseñada como si fuera de
-  ahora es peor que no decir nada.
+  QUE HACE LA 1.2.3, entonces: exactamente lo que hace la 1.2.2. Si ya la tienes, no hay
+  ningun motivo tecnico para instalar esta. El unico cambio real es el numero que enseña
+  "Acerca de" -- que es justo el dato que hay que pedirle a alguien cuando cuenta un fallo,
+  y por eso importa que ninguna version circule con un numero que no le corresponde.
 ```
 
 ---
