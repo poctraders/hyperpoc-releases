@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 1.3.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 1.3.2 - Manual.pdf` | El manual completo, 50 páginas con capturas. |
-| `hyperpoc 1.3.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 1.3.3.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 1.3.3 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
+| `hyperpoc 1.3.3.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-3AEFD5CB296C47FCA48646969DC0F0E7E423003F03B03A917667D3AF94ABC041
+AB570F963725A89F96B1660D705CAA0D130142A413EC7E46B96927CEE1E2A771
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 1.3.2.exe" SHA256
+certutil -hashfile "hyperpoc 1.3.3.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 1.3.2.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 1.3.3.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,20 +78,22 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 1.3.2
+## Novedades de la 1.3.3
 
 ```
-1.3.2  (02/08/2026)
-  AHORA SI SE CIERRA NINJATRADER al pulsar "Descargar ahora". En la 1.3.1 ya encontraba su
-  ventana principal, pero al cerrarla fallaba con "the calling thread cannot access this
-  object because a different thread owns it": en NinjaTrader CADA VENTANA corre en su
-  propio hilo, y hay que pedirle el cierre a la ventana por su hilo, no por el de la
-  aplicacion. Resultado: aceptabas cerrar, se abria la pagina de descarga... y NinjaTrader
-  seguia ahi, con sus ficheros en uso y el instalador sin poder sustituirlos.
+1.3.3  (02/08/2026)
+  SE PUEDE APAGAR EL AVISO DE VERSION NUEVA. En "Acerca de" hay ahora una casilla,
+  "Avisarme cuando haya una version nueva", justo debajo del numero de version. Viene
+  marcada: quien no sabe que esto existe es justo a quien mas le hace falta que le avisen.
 
-  Este fallo -- y el de la 1.3.1 -- salieron pulsando el boton de verdad, no leyendo el
-  codigo. Las dos veces el aviso "funcionaba" en todo salvo en lo unico que tenia que
-  hacer al final.
+  APAGARLA SIGNIFICA QUE ESTE ORDENADOR NO LE PREGUNTA NADA A GITHUB al arrancar. No es
+  "salir a mirar y callarse": es no salir. Quien apaga esto normalmente lo hace por eso --
+  porque no quiere la peticion, no porque le moleste el cartel.
+
+  Es POR ORDENADOR: apagarlo en el portatil no lo apaga en el de sobremesa. Y se guarda al
+  instante, sin boton de aceptar. La preferencia vive en su propio fichero, no en el
+  config.json donde esta tu clave cifrada: una casilla no puede tener la posibilidad de
+  dejarte sin clave.
 ```
 
 ---
