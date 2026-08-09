@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 1.4.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 1.4 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
-| `hyperpoc 1.4.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 1.4.1.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 1.4.1 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
+| `hyperpoc 1.4.1.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-22D84D8A88973773EF7E525251BD670526E001080E50A7987B852F8F4DD001D6
+F93F0F57728F15E2784573D90F108E987BA1E353FD029D89ED5D6E3728D8EE10
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 1.4.exe" SHA256
+certutil -hashfile "hyperpoc 1.4.1.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 1.4.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 1.4.1.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,29 +78,30 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 1.4
+## Novedades de la 1.4.1
 
 ```
-1.4  (04/08/2026)
-  EL CODIGO VA BLINDADO. Los tres ensamblados .NET (el addon, el adapter y el registro de la
-  conexion) y el motor Python se reparten ahora OFUSCADOS: quien abra el instalador con un
-  decompilador (dnSpy, ILSpy) ya no se encuentra el codigo en claro, sino nombres sin
-  sentido, cadenas cifradas y flujo enrevesado. El motor Python deja de ser bytecode que se
-  desempaqueta y se lee: ahora es codigo maquina de verdad (compilado con Nuitka).
+1.4.1  (09/08/2026)
+  ARREGLA UNA 1.4 QUE NO PODIA OPERAR. Si tienes la 1.4, ACTUALIZA: al meter la clave de la
+  API wallet contestaba "esa clave no es una clave privada valida" aunque la clave fuera
+  perfecta, y tampoco llegaba a conectar. No era tu clave ni tu cuenta: al blindar el motor
+  Python en la 1.4 se quedo fuera del ejecutable una pieza de criptografia (la que calcula
+  keccak), y sin ella no se puede sacar la direccion de una clave ni firmar una orden. La
+  pieza se elige sobre la marcha, en tiempo de ejecucion, y el compilador que blinda el
+  programa no la vio venir.
 
-  QUE CAMBIA PARA TI: NADA. Se conecta, opera y avisa exactamente igual; es el MISMO
-  programa, solo que cuesta muchisimo mas robarlo y reutilizarlo. Ninguna clave viajaba ni
-  viaja en los binarios (la tuya sigue cifrada con tu usuario de Windows), asi que esto no
-  protege un secreto: protege el trabajo.
+  QUE TIENES QUE HACER: instalar esta version encima. NO vuelvas a meter la clave -- sigue
+  guardada y cifrada donde estaba -- y NO tienes que crear ninguna API wallet nueva. Si
+  llegaste a crear varias probando, puedes revocar las que te sobren en Hyperliquid
+  (More -> API); no hace falta para que esto funcione.
 
-  LO HONESTO: ninguna proteccion de cliente es inviolable -- lo que hace es volver el robo
-  caro y doloroso, y frenar en seco la copia casual. Es ademas el cimiento del sistema de
-  claves de instalacion que viene despues: sin este blindaje, cualquier control de licencia
-  se quitaria en cinco minutos con un decompilador.
-
-  EFECTO SECUNDARIO: al ir SIN FIRMA y con la proteccion al maximo, SmartScreen o algun
-  antivirus pueden quejarse mas de la cuenta la primera vez ("Mas informacion" -> "Ejecutar
-  de todas formas"). Es el precio de blindarlo fuerte sin un certificado de firma.
+  Y PARA QUE NO SE REPITA. El programa lleva ahora una autoprueba de firma con un resultado
+  conocido, y la construccion de cada version la ejecuta contra el ejecutable ya compilado:
+  si no firma, NO SE GENERA INSTALADOR. Se puede lanzar a mano con
+  "hl_sidecar.exe --autoprueba" (no toca tu configuracion ni sale a la red). Ademas, cuando
+  algo del motor falle, se dira que ha fallado el motor: la 1.4 presentaba una averia suya
+  como si el dato que habias escrito estuviera mal, que es la peor forma de fallar --
+  manda a buscar el problema justo donde no esta.
 ```
 
 ---
