@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 1.4.1.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 1.4.1 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
-| `hyperpoc 1.4.1.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 1.4.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 1.4.2 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
+| `hyperpoc 1.4.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-F93F0F57728F15E2784573D90F108E987BA1E353FD029D89ED5D6E3728D8EE10
+9CFB0CBEE09098813BD1C6BA0E1ACC1A8EB9DF327535DBA75BCD6EE169DB39AF
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 1.4.1.exe" SHA256
+certutil -hashfile "hyperpoc 1.4.2.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 1.4.1.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 1.4.2.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,30 +78,32 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 1.4.1
+## Novedades de la 1.4.2
 
 ```
-1.4.1  (09/08/2026)
-  ARREGLA UNA 1.4 QUE NO PODIA OPERAR. Si tienes la 1.4, ACTUALIZA: al meter la clave de la
-  API wallet contestaba "esa clave no es una clave privada valida" aunque la clave fuera
-  perfecta, y tampoco llegaba a conectar. No era tu clave ni tu cuenta: al blindar el motor
-  Python en la 1.4 se quedo fuera del ejecutable una pieza de criptografia (la que calcula
-  keccak), y sin ella no se puede sacar la direccion de una clave ni firmar una orden. La
-  pieza se elige sobre la marcha, en tiempo de ejecucion, y el compilador que blinda el
-  programa no la vio venir.
+1.4.2  (09/08/2026)
+  EL MOTOR VUELVE A SABER DONDE ESTA. Si tienes la 1.4.1 y te funciona, NO te cambia nada
+  al actualizar: en una instalacion normal las dos versiones miran exactamente la misma
+  carpeta. Se corrige un fallo que hoy no puede darte la cara, pero que estaba puesto para
+  darla el dia menos pensado.
 
-  QUE TIENES QUE HACER: instalar esta version encima. NO vuelvas a meter la clave -- sigue
-  guardada y cifrada donde estaba -- y NO tienes que crear ninguna API wallet nueva. Si
-  llegaste a crear varias probando, puedes revocar las que te sobren en Hyperliquid
-  (More -> API); no hace falta para que esto funcione.
+  QUE PASABA. El motor averigua donde vive su instalacion mirando desde que carpeta se le
+  ejecuta. Al compilarlo en un unico fichero (el blindaje de la 1.4), esa pregunta empezo a
+  contestar la carpeta TEMPORAL donde el programa se descomprime al arrancar, y no la que
+  el usuario tiene en disco. Como el instalador pone siempre la instalacion en el mismo
+  sitio, el resultado seguia siendo correcto por casualidad -- pero una copia del motor
+  colocada en cualquier otro sitio habria trabajado, sin decir ni una palabra, sobre la
+  instalacion de Documentos.
 
-  Y PARA QUE NO SE REPITA. El programa lleva ahora una autoprueba de firma con un resultado
-  conocido, y la construccion de cada version la ejecuta contra el ejecutable ya compilado:
-  si no firma, NO SE GENERA INSTALADOR. Se puede lanzar a mano con
-  "hl_sidecar.exe --autoprueba" (no toca tu configuracion ni sale a la red). Ademas, cuando
-  algo del motor falle, se dira que ha fallado el motor: la 1.4 presentaba una averia suya
-  como si el dato que habias escrito estuviera mal, que es la peor forma de fallar --
-  manda a buscar el problema justo donde no esta.
+  Y LO MISMO EN "DONDE ESTA INSTALADO". Ese acceso directo esta para contestar de un
+  vistazo donde vive tu configuracion; en la 1.4 y la 1.4.1 el renglon "ejecutable" daba
+  esa carpeta temporal, con un nombre distinto en cada arranque y borrada al salir. Ahora
+  dice el fichero que tienes en disco, que es lo unico util cuando hay que mirar algo.
+
+  COMO SE ENCONTRO. Arreglando la comprobacion que revisa lo que se entrega: hasta hoy
+  examinaba un paquete distinto del que se publicaba, y en cuanto miro el bueno, salto.
+  Desde ahora esa comprobacion es obligatoria para publicar: si no se ha pasado sobre el
+  fichero exacto que se va a subir, no se sube.
 ```
 
 ---
