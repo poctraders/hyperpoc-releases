@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 1.4.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 1.4.2 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
-| `hyperpoc 1.4.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 1.4.3.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 1.4.3 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
+| `hyperpoc 1.4.3.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-9CFB0CBEE09098813BD1C6BA0E1ACC1A8EB9DF327535DBA75BCD6EE169DB39AF
+B06159678E125D5EC3CBB0ED0978E77D9DDB8E1AE4C3B7703D1AC5C9165B7F37
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 1.4.2.exe" SHA256
+certutil -hashfile "hyperpoc 1.4.3.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 1.4.2.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 1.4.3.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,32 +78,35 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 1.4.2
+## Novedades de la 1.4.3
 
 ```
-1.4.2  (09/08/2026)
-  EL MOTOR VUELVE A SABER DONDE ESTA. Si tienes la 1.4.1 y te funciona, NO te cambia nada
-  al actualizar: en una instalacion normal las dos versiones miran exactamente la misma
-  carpeta. Se corrige un fallo que hoy no puede darte la cara, pero que estaba puesto para
-  darla el dia menos pensado.
+1.4.3  (11/08/2026)
+  SI CIERRAS EN NINJATRADER, SE CIERRA EN HYPERLIQUID. ACTUALIZA. Podia pasar que tu stop o
+  tu objetivo saltara, NinjaTrader te dejara la posicion PLANA, y en Hyperliquid siguiera
+  ABIERTA. Con dinero dentro, su liquidacion corriendo, y tu creyendo que habias salido.
 
-  QUE PASABA. El motor averigua donde vive su instalacion mirando desde que carpeta se le
-  ejecuta. Al compilarlo en un unico fichero (el blindaje de la 1.4), esa pregunta empezo a
-  contestar la carpeta TEMPORAL donde el programa se descomprime al arrancar, y no la que
-  el usuario tiene en disco. Como el instalador pone siempre la instalacion en el mismo
-  sitio, el resultado seguia siendo correcto por casualidad -- pero una copia del motor
-  colocada en cualquier otro sitio habria trabajado, sin decir ni una palabra, sobre la
-  instalacion de Documentos.
+  POR QUE PASABA. Tu stop vive en dos sitios a la vez: en NinjaTrader, que lo dispara con el
+  precio de su grafico, y en Hyperliquid, que lo dispara con SU precio de marca. No son el
+  mismo numero. Casi siempre saltan a la vez y no se nota; cuando no, las dos plataformas se
+  quedan contando cosas distintas.
 
-  Y LO MISMO EN "DONDE ESTA INSTALADO". Ese acceso directo esta para contestar de un
-  vistazo donde vive tu configuracion; en la 1.4 y la 1.4.1 el renglon "ejecutable" daba
-  esa carpeta temporal, con un nombre distinto en cada arranque y borrada al salir. Ahora
-  dice el fichero que tienes en disco, que es lo unico util cuando hay que mirar algo.
+  LO GRAVE NO ERA ESO, ERA EL SILENCIO. El programa tiene un vigilante que compara lo que
+  tienes en NinjaTrader con lo que hay en Hyperliquid... pero solo miraba en una direccion:
+  "NinjaTrader tiene algo que Hyperliquid no tiene". Al reves -- Hyperliquid con una posicion
+  que NinjaTrader no enseña -- NO LO MIRABA NADIE. Ni un aviso, ni una linea en el registro.
+  Solo se veia entrando en la web de Hyperliquid.
 
-  COMO SE ENCONTRO. Arreglando la comprobacion que revisa lo que se entrega: hasta hoy
-  examinaba un paquete distinto del que se publicaba, y en cuanto miro el bueno, salto.
-  Desde ahora esa comprobacion es obligatoria para publicar: si no se ha pasado sobre el
-  fichero exacto que se va a subir, no se sube.
+  QUE HACE AHORA, y son dos cosas distintas:
+   · Si el cierre lo ha provocado NinjaTrader (salta tu stop, tu objetivo, o pulsas Close) y
+     al comprobarlo Hyperliquid sigue abierta, SE CIERRA ALLI automaticamente y te lo dice.
+     Espera unos segundos antes: lo normal es que Hyperliquid cierre sola, y adelantarse
+     seria mandar un cierre por algo que iba a cerrarse igual. Si tras tres intentos no lo
+     consigue, te avisa de que tienes dinero expuesto y que entres a cerrarlo a mano.
+   · Si la posicion aparece en Hyperliquid sin que NinjaTrader la conozca (la abriste desde
+     la web, o desde otro ordenador), NO SE CIERRA SOLA -- eso seria que el programa liquide
+     algo que abriste queriendo. Se te avisa y NinjaTrader se repinta con lo que hay en
+     Hyperliquid, que es la regla de siempre: manda Hyperliquid.
 ```
 
 ---
