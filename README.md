@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.1.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.1.2 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
-| `hyperpoc 0.1.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.1.3.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.1.3 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
+| `hyperpoc 0.1.3.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-308233BEA3484C0FE554A30F976F3E2003FC49BB6396BC381849E15D1BEC8FFF
+37F34692788257992C5344148A7D5C94A060142D88023CF1ADA7E900DDC437B6
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.1.2.exe" SHA256
+certutil -hashfile "hyperpoc 0.1.3.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.1.2.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.1.3.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,19 +78,24 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.1.2
+## Novedades de la 0.1.3
 
 ```
-0.1.2 Beta  (11/08/2026)
-  SE ACABO EL CARTEL "ERROR COLLECT" AL ARRANCAR. NinjaTrader saca a veces, al abrirse en
-  frio, un cartel suyo con un titulo sin sentido ("4GILE") y el texto "ERROR COLLECT 02 | 3".
-  No es de este programa, no dice nada que puedas hacer, y hasta que no lo aceptas
-  NinjaTrader no termina de arrancar. Ahora se cierra solo: medido, dura medio segundo y
-  NinjaTrader sigue su camino.
+0.1.3 Beta  (11/08/2026)
+  ARREGLADO DE RAIZ EL CARTEL "ERROR COLLECT" AL ABRIR NINJATRADER. En la 0.1.2 se cerraba
+  solo, pero llegaba a verse medio segundo. Ya no aparece en absoluto, porque estaba
+  arreglada la consecuencia y no la causa.
 
-  SOLO SE CIERRA ESE. Se exige que el cartel lleve ese texto exacto, asi que la pregunta de
-  NinjaTrader para autorizar los complementos --y cualquier "¿seguro que...?"-- siguen
-  saliendo y esperandote. Faltaria mas: cerrar carteles a ciegas seria peor que el cartel.
+  QUE PASABA. NinjaTrader necesita arrancar con su propia carpeta como directorio de
+  trabajo; su acceso directo de toda la vida lo hace ("Iniciar en"), y por eso nadie habia
+  visto nunca ese cartel. Cuando el icono paso a abrir NinjaTrader a traves de la revision
+  previa (0.1.1), se le lanzaba SIN ese dato, NinjaTrader no encontraba algo suyo y sacaba
+  el aviso -- que ademas bloquea el arranque hasta que se acepta. Una linea.
+
+  Se deja puesto, por si acaso, el cierre automatico de ESE cartel concreto: si alguna vez
+  reapareciera por otro motivo, no dejaria a nadie plantado delante de una ventana que no
+  dice nada. Cualquier otro aviso de NinjaTrader --la autorizacion de complementos, los
+  "¿seguro que...?"-- sigue saliendo y esperandote.
 ```
 
 ---
