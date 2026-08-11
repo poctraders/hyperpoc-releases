@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.1.1.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.1.1 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
-| `hyperpoc 0.1.1.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.1.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.1.2 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
+| `hyperpoc 0.1.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-B255C857750F03B355841C2475685FE72727BA4D97DF601ACDBB5D79CBD47230
+308233BEA3484C0FE554A30F976F3E2003FC49BB6396BC381849E15D1BEC8FFF
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.1.1.exe" SHA256
+certutil -hashfile "hyperpoc 0.1.2.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.1.1.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.1.2.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,47 +78,19 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.1.1
+## Novedades de la 0.1.2
 
 ```
-0.1.1 Beta  (11/08/2026)
-  NUMERACION NUEVA. A partir de aqui las versiones van como 0.x.x Beta: la primera cifra
-  sube con los cambios grandes y la segunda con los menores. Mientras ponga 0.x.x, esto es
-  una beta y se dice claro. Esta version trae, ademas, todo lo que sigue.
+0.1.2 Beta  (11/08/2026)
+  SE ACABO EL CARTEL "ERROR COLLECT" AL ARRANCAR. NinjaTrader saca a veces, al abrirse en
+  frio, un cartel suyo con un titulo sin sentido ("4GILE") y el texto "ERROR COLLECT 02 | 3".
+  No es de este programa, no dice nada que puedas hacer, y hasta que no lo aceptas
+  NinjaTrader no termina de arrancar. Ahora se cierra solo: medido, dura medio segundo y
+  NinjaTrader sigue su camino.
 
-  AL PULSAR EL ICONO DE NINJATRADER, TODO SE PONE EN ORDEN SOLO. Esta version trae una
-  revision que deja la base de datos de NinjaTrader coherente con Hyperliquid antes de
-  abrirlo: cuenta plana --para que tu posicion REAL se repinte desde Hyperliquid en vez de
-  arrastrar lo que el simulador creyera-- sin fichas de instrumento duplicadas y sin
-  referencias colgadas de las que impiden que NinjaTrader llegue a arrancar.
-
-  ESA REVISION NO SE ESTABA EJECUTANDO EN TU ORDENADOR. Existia desde hace tiempo, pero solo
-  la lanzaba una herramienta interna que NO se distribuye: despues de instalar, no corria
-  NUNCA. Ahora el icono de NinjaTrader del Escritorio la ejecuta y abre NinjaTrader a
-  continuacion, sin ventanas, sin preguntas y sin que tengas que saber que existe. Si por lo
-  que sea no pudiera hacerse, NinjaTrader se abre igual: quedarte sin plataforma por una
-  limpieza seria peor que el problema que evita.
-
-
-  LO QUE PONGAS FUERA DE NINJATRADER YA APARECE EN NINJATRADER. Si dejabas una orden desde
-  la web de Hyperliquid, o desde otro ordenador, NinjaTrader NO la enseñaba. Lo detectaba
-  --lo escribia en el registro-- pero se limitaba a decir "reconecta para que NT las
-  refleje". O sea: ordenes vivas, con tu dinero, que tu pantalla no mostraba, y para verlas
-  tenias que leer un fichero de registro y reconectar a mano.
-
-  Ahora NinjaTrader se pone al dia solo, con la misma maquinaria del "Conectar". Espera dos
-  vueltas antes de hacerlo --entre que Hyperliquid acepta una orden y NinjaTrader la refleja
-  hay unos segundos que son normales-- y lo intenta UNA vez por cada juego de ordenes: si
-  aun asi no se reflejan (por ejemplo un instrumento que no tienes dado de alta), lo dice y
-  no insiste, en vez de quedarse reiniciandose en bucle.
-
-  Con esto, las dos plataformas se persiguen en los dos sentidos: lo que NinjaTrader tiene y
-  Hyperliquid no, se limpia; lo que Hyperliquid tiene y NinjaTrader no, se refleja.
-
-  Y DEJA DE ACUMULAR COPIAS DE SEGURIDAD. La revision que corre al abrir NinjaTrader hacia
-  una copia de la base de datos (4,8 MB) CADA VEZ, y no borraba ninguna: se habian juntado
-  12 copias, 76 MB. Quien abre NinjaTrader a diario se comia mas de un giga al año en
-  copias que no mira nadie. Ahora se guardan las 3 ultimas.
+  SOLO SE CIERRA ESE. Se exige que el cartel lleve ese texto exacto, asi que la pregunta de
+  NinjaTrader para autorizar los complementos --y cualquier "¿seguro que...?"-- siguen
+  saliendo y esperandote. Faltaria mas: cerrar carteles a ciegas seria peor que el cartel.
 ```
 
 ---
