@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 1.4.4.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 1.4.4 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
-| `hyperpoc 1.4.4.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 1.4.5.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 1.4.5 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
+| `hyperpoc 1.4.5.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-9E2B5AC35ED17F99D6F7C69CB600802ADEF399C4973AE13EE9933D45FDDB7BE4
+73DF14CA32C3EA6D27B379B44A8CEF814EC319ED7570E4590096C66DB9AB6741
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 1.4.4.exe" SHA256
+certutil -hashfile "hyperpoc 1.4.5.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 1.4.4.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 1.4.5.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,35 +78,25 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 1.4.4
+## Novedades de la 1.4.5
 
 ```
-1.4.4  (11/08/2026)
-  EL APALANCAMIENTO YA ES EL DE HYPERLIQUID, TAMBIEN EN NINJATRADER. Hasta ahora NinjaTrader
-  se comportaba como si todo fuera 1x: con 18,41 $ en la cuenta decia que tu poder de compra
-  eran 18,41 $, cuando Hyperliquid te dejaba abrir 183,77 $ en BTC (a 10x) o 368,19 $ en ETH
-  (a 20x). El numero era el saldo RETIRABLE, no lo que puedes abrir. Ahora se multiplica por
-  tu apalancamiento de verdad.
+1.4.5  (11/08/2026)
+  TUS INSTRUMENTOS BUILDER YA NO DESAPARECEN DEL MENU. Pasaba de vez en cuando al abrir
+  NinjaTrader: entrabas en "Hyperliquid Poctraders > Instrumentos" y NO estaba la seccion de
+  tu cuenta builder (XYZ y demas). Sus instrumentos no se perdian --seguian ahi, mezclados
+  entre los del dex principal-- pero encontrarlos era imposible si no sabias buscarlos, y se
+  quedaba asi TODA la sesion. La unica salida era descubrir "Actualizar lista".
 
-  UN APUNTE HONESTO. Hyperliquid aplica el apalancamiento POR ACTIVO y NinjaTrader solo tiene
-  UN poder de compra por cuenta, asi que hay que elegir un numero: se usa el MAS ALTO que
-  tengas configurado en esa cuenta. Asi NinjaTrader no te frena nunca algo que Hyperliquid
-  aceptaria. Si te pasas del tope del activo concreto, Hyperliquid la rechaza y el aviso de
-  siempre te dice el motivo -- un error que se ve, en vez de uno que te desinforma callado.
+  POR QUE. El menu se construye UNA sola vez, la primera que lo abres, y para saber de que
+  cuenta es cada instrumento necesita unos datos que el motor tarda unos segundos en cargar.
+  Si abrias el menu en esos primeros segundos, todo se colocaba bajo la cuenta principal --y
+  ahi se quedaba, porque el menu ya se daba por construido--. Cuestion de tener el raton
+  rapido: por eso pasaba unas veces si y otras no.
 
-  Y AHORA SE VE, EN TIEMPO REAL, JUNTO A LA ORDEN. En el grafico (al lado de la linea de
-  liquidacion) y en el panel de ordenes aparecen tres cifras:
-      x30 Cross  ·  360,00 $ en mercado  ·  12,00 $ de tu dinero  ·  libre para abrir: 192,00 $
-  El multiplicador, lo que hay en mercado, cuanto de TU dinero lo sostiene y lo que aun
-  puedes abrir. Estando plano tambien sale el "x30" y el "libre para abrir", que es cuando de
-  verdad se mira: antes de entrar. Ninguna cifra se estima aqui -- el "libre para abrir" lo
-  calcula Hyperliquid con tu saldo y tu apalancamiento, asi que coincide siempre con lo que
-  te dejaria hacer.
-
-  MENOS VENTANAS. El aviso de "se ha cerrado en Hyperliquid automaticamente" (1.4.3) ya no
-  interrumpe: sale bien, no hay nada que hacer, y queda en el registro. El que SI sigue
-  saliendo es el del caso malo -- si no se consigue cerrar, tienes dinero expuesto y hay que
-  entrar a cerrarlo a mano.
+  AHORA. Si el menu se construye antes de tiempo, no se da por bueno: la proxima vez que lo
+  abras se rehace solo, ya con todo en su sitio. No hay que tocar nada ni saber que existe
+  "Actualizar lista" (que sigue estando, para forzarlo cuando quieras).
 ```
 
 ---
