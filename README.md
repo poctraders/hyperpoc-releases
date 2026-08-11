@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.1.3.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.1.3 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
-| `hyperpoc 0.1.3.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.1.4.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.1.4 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
+| `hyperpoc 0.1.4.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-37F34692788257992C5344148A7D5C94A060142D88023CF1ADA7E900DDC437B6
+EECB65C2D67FC0DB35D3E9921474F16DFABF9B3C6C2E3550588B0BB93641E4E7
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.1.3.exe" SHA256
+certutil -hashfile "hyperpoc 0.1.4.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.1.3.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.1.4.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,24 +78,28 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.1.3
+## Novedades de la 0.1.4
 
 ```
-0.1.3 Beta  (11/08/2026)
-  ARREGLADO DE RAIZ EL CARTEL "ERROR COLLECT" AL ABRIR NINJATRADER. En la 0.1.2 se cerraba
-  solo, pero llegaba a verse medio segundo. Ya no aparece en absoluto, porque estaba
-  arreglada la consecuencia y no la causa.
+0.1.4 Beta  (11/08/2026)
+  EL PODER DE COMPRA YA BAJA CUANDO BAJAS EL APALANCAMIENTO. En la 0.1.1 se estreno el poder
+  de compra con apalancamiento real, y estaba mal de dos formas que se sumaban: ponias
+  XYZ100 a 1x, el grafico decia "libre para abrir 8,87 $"... y el Control Center seguia
+  diciendo 484,79 $. Reiniciando NinjaTrader, tambien.
 
-  QUE PASABA. NinjaTrader necesita arrancar con su propia carpeta como directorio de
-  trabajo; su acceso directo de toda la vida lo hace ("Iniciar en"), y por eso nadie habia
-  visto nunca ese cartel. Cuando el icono paso a abrir NinjaTrader a traves de la revision
-  previa (0.1.1), se le lanzaba SIN ese dato, NinjaTrader no encontraba algo suyo y sacaba
-  el aviso -- que ademas bloquea el arranque hasta que se acepta. Una linea.
+  POR QUE. Se multiplicaba tu saldo por "el apalancamiento mas alto de la cuenta", y ese
+  numero se guardaba en disco sin caducidad. Asi que el 50x de otro instrumento tapaba al
+  1x del que estabas mirando, y encima el valor sobrevivia al reinicio. Un numero de riesgo
+  que NO baja cuando bajas el riesgo es de lo peor que puede enseñar un programa.
 
-  Se deja puesto, por si acaso, el cierre automatico de ESE cartel concreto: si alguna vez
-  reapareciera por otro motivo, no dejaria a nadie plantado delante de una ventana que no
-  dice nada. Cualquier otro aviso de NinjaTrader --la autorizacion de complementos, los
-  "¿seguro que...?"-- sigue saliendo y esperandote.
+  AHORA el numero lo da Hyperliquid: es lo que ella misma dice que puedes abrir, ya con tu
+  saldo y tu apalancamiento dentro. No se calcula ni se recuerda nada. Cambias el
+  apalancamiento y el Control Center cambia contigo, diciendo lo mismo que el grafico.
+
+  Con varios graficos abiertos a distinto apalancamiento, NinjaTrader solo admite UN numero
+  por cuenta: se queda con el mayor, para no frenarte una orden que Hyperliquid si aceptaria.
+  Sin ningun grafico abierto enseña tu saldo retirable, que es lo honesto mientras no hay
+  con que compararlo, y se corrige solo en cuanto abres uno.
 ```
 
 ---
