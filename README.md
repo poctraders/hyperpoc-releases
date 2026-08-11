@@ -14,7 +14,7 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 | Archivo | Qué es |
 |---|---|
 | `hyperpoc 0.1.5.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.1.5 - Manual.pdf` | El manual completo, 51 páginas con capturas. |
+| `hyperpoc 0.1.5 - Manual.pdf` | El manual completo, 53 páginas con capturas. |
 | `hyperpoc 0.1.5.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
