@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.1.6.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.1.6 - Manual.pdf` | El manual completo, 0 páginas con capturas. |
-| `hyperpoc 0.1.6.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.1.7.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.1.7 - Manual.pdf` | El manual completo, 54 páginas con capturas. |
+| `hyperpoc 0.1.7.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-2A49A5209253E4C3F10980C29431A2FB1209B8BF5A097C939F578D24A453301F
+95C99E7E79A3A69CEE49F229DD2D2F49835D047C802D1A6B5DC6CA81A5A08752
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.1.6.exe" SHA256
+certutil -hashfile "hyperpoc 0.1.7.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.1.6.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.1.7.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,38 +78,16 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.1.6
+## Novedades de la 0.1.7
 
 ```
-0.1.6 Beta  (13/08/2026)
-  YA NO SE TE CUELA UNA ORDEN QUE NO TE CABE. Si metes una orden que pide mas de lo que tu
-  cuenta puede abrir ahora mismo, NinjaTrader te lo dice ANTES y no la manda. Hasta ahora
-  salia, la rechazaba Hyperliquid, y te enterabas despues: con sus palabras ("insufficient
-  margin"), no con las tuyas, y con una orden a medias que habia que limpiar del grafico.
-
-  El numero no nos lo inventamos: es el poder de compra que Hyperliquid dice que tienes, con
-  tu saldo y tu apalancamiento ya dentro, y es EL MISMO que ves en el Control Center. Cada
-  dex tiene el suyo, porque en Hyperliquid el dinero de cada uno es un bolsillo aparte.
-
-  CERRAR Y REDUCIR NO SE BLOQUEAN NUNCA, ni con la cuenta a cero. Un stop y el boton Close no
-  gastan margen: lo liberan. Quedarte encerrado dentro de una posicion porque el programa no
-  te deja salir seria mucho peor que cualquier orden que se cuele.
-
-  Y si no se puede comprobar (sin conexion, o Hyperliquid no publica el dato), la orden PASA
-  y decide Hyperliquid. "No he podido mirarlo" no es "no tienes".
-
-  LOS AVISOS YA TIENEN LA CARA DE NINJATRADER. Salian como cuadros de Windows: un recuadro
-  blanco del sistema en mitad de una plataforma oscura, o al reves si usabas el tema claro.
-  No era que estuvieran mal pintados: es que un cuadro del sistema no se puede pintar. Ahora
-  son ventanas de NinjaTrader y toman el color del tema que tengas puesto, y ademas no
-  bloquean la plataforma mientras estan abiertas.
-
-  Lo mismo con las ventanas de Configurar, Apalancamiento, Historico y Acerca de: tenian los
-  colores escritos a mano suponiendo el tema oscuro, asi que con el claro habia texto casi
-  ilegible.
-
-  TU ID DE INSTALACION, EN "ACERCA DE", con un boton para copiarlo. Es lo primero que hay que
-  preguntarte cuando escribes con un problema, y hasta ahora no habia forma de dartelo.
+0.1.7 Beta  (13/08/2026)
+  LA VENTANA "ACERCA DE" YA NO CORTA EL TEXTO. Con el ID de instalacion dentro, la ultima linea
+  salia partida por la mitad. El alto de la ventana estaba escrito a mano, y resulta que
+  NinjaTrader ni lo mira: se le pedian 620 puntos y se quedaba en 531, asi que ir subiendo el
+  numero no arreglaba nada. Ahora la ventana se ajusta a lo que tiene dentro, y si aun asi se
+  quedara corta, se puede desplazar: una barra de desplazamiento es fea, media frase cortada es
+  un fallo.
 ```
 
 ---
