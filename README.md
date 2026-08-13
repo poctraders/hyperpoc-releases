@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.1.5.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.1.5 - Manual.pdf` | El manual completo, 53 páginas con capturas. |
-| `hyperpoc 0.1.5.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.1.6.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.1.6 - Manual.pdf` | El manual completo, 0 páginas con capturas. |
+| `hyperpoc 0.1.6.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-0FD1508DF18363B5B3820A98DE073EF52E19784D8BE273DA682F27DD61C9CFD9
+2A49A5209253E4C3F10980C29431A2FB1209B8BF5A097C939F578D24A453301F
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.1.5.exe" SHA256
+certutil -hashfile "hyperpoc 0.1.6.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.1.5.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.1.6.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,22 +78,38 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.1.5
+## Novedades de la 0.1.6
 
 ```
-0.1.5 Beta  (11/08/2026)
-  YA NO SE REINICIA EL SIMULADOR SIN MOTIVO. En la 0.1.4 se estreno que NinjaTrader refleje
-  solo las ordenes que dejas fuera de el (desde la web de Hyperliquid, o desde otro
-  ordenador). Estaba mal contado: si ponias VARIAS ordenes seguidas del mismo instrumento,
-  algunas de las TUYAS se contaban como si fueran de fuera, y eso disparaba una
-  reconstruccion del simulador que no hacia ninguna falta.
+0.1.6 Beta  (13/08/2026)
+  YA NO SE TE CUELA UNA ORDEN QUE NO TE CABE. Si metes una orden que pide mas de lo que tu
+  cuenta puede abrir ahora mismo, NinjaTrader te lo dice ANTES y no la manda. Hasta ahora
+  salia, la rechazaba Hyperliquid, y te enterabas despues: con sus palabras ("insufficient
+  margin"), no con las tuyas, y con una orden a medias que habia que limpiar del grafico.
 
-  No se perdia nada --las ordenes de Hyperliquid ni se tocan, y la reconstruccion las vuelve
-  a pintar-- pero reconstruir mientras estas operando es justo lo que no debe pasar.
-  Corregido: ahora la cuenta de "lo que NinjaTrader enseña" esta completa tambien mientras
-  se esta hablando con Hyperliquid sobre ese instrumento.
+  El numero no nos lo inventamos: es el poder de compra que Hyperliquid dice que tienes, con
+  tu saldo y tu apalancamiento ya dentro, y es EL MISMO que ves en el Control Center. Cada
+  dex tiene el suyo, porque en Hyperliquid el dinero de cada uno es un bolsillo aparte.
 
-  Lo encontro la prueba de ciclo completo con dinero real, que es para lo que esta.
+  CERRAR Y REDUCIR NO SE BLOQUEAN NUNCA, ni con la cuenta a cero. Un stop y el boton Close no
+  gastan margen: lo liberan. Quedarte encerrado dentro de una posicion porque el programa no
+  te deja salir seria mucho peor que cualquier orden que se cuele.
+
+  Y si no se puede comprobar (sin conexion, o Hyperliquid no publica el dato), la orden PASA
+  y decide Hyperliquid. "No he podido mirarlo" no es "no tienes".
+
+  LOS AVISOS YA TIENEN LA CARA DE NINJATRADER. Salian como cuadros de Windows: un recuadro
+  blanco del sistema en mitad de una plataforma oscura, o al reves si usabas el tema claro.
+  No era que estuvieran mal pintados: es que un cuadro del sistema no se puede pintar. Ahora
+  son ventanas de NinjaTrader y toman el color del tema que tengas puesto, y ademas no
+  bloquean la plataforma mientras estan abiertas.
+
+  Lo mismo con las ventanas de Configurar, Apalancamiento, Historico y Acerca de: tenian los
+  colores escritos a mano suponiendo el tema oscuro, asi que con el claro habia texto casi
+  ilegible.
+
+  TU ID DE INSTALACION, EN "ACERCA DE", con un boton para copiarlo. Es lo primero que hay que
+  preguntarte cuando escribes con un problema, y hasta ahora no habia forma de dartelo.
 ```
 
 ---
