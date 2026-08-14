@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.1.9.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.1.9 - Manual.pdf` | El manual completo, 63 páginas con capturas. |
-| `hyperpoc 0.1.9.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.2.0.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.2.0 - Manual.pdf` | El manual completo, 64 páginas con capturas. |
+| `hyperpoc 0.2.0.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-9FDAB98346B2523CF52AB79B32C9439BF42E63D22034FBAFDA291202F4E2641F
+2A3CB36FAE47EB00A03B84004D90043B8AA136CD8C47E286F907C852CB33D546
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.1.9.exe" SHA256
+certutil -hashfile "hyperpoc 0.2.0.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.1.9.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.2.0.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,22 +78,36 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.1.9
+## Novedades de la 0.2.0
 
 ```
-0.1.9 Beta  (14/08/2026)
-  EL MANUAL TRAE LA LISTA COMPLETA DE MERCADOS. Apendice B: los 596 instrumentos que instala
-  esta version, repartidos por cuenta -- 179 perpetuos y 307 spot del dex principal, 84 del dex
-  xyz, y los de hyna y para, que se pueden graficar pero no operar mientras no tengas cuenta
-  ahi. Cada uno con el apalancamiento maximo que admite, y marcados los que solo aceptan margen
-  aislado.
+0.2.0 Beta  (14/08/2026)
+  LA LISTA DE MERCADOS SE MANTIENE SOLA. Hasta ahora los mercados se daban de alta una vez, al
+  instalar, y ahi se quedaban. Hyperliquid lista y retira mercados continuamente, asi que a las
+  pocas semanas tenias la lista de un exchange que ya no existia: faltaban los nuevos, y los
+  retirados seguian dentro -- se podian graficar, y se podia intentar meter una orden en ellos
+  para recibir a cambio un rechazo que no explicaba nada. Ninguno de los tres botones
+  "Registrar..." quitaba nada; solo anadian.
 
-  Y una clave para leer cualquier nombre sin buscarlo: el prefijo dice de que cuenta es
-  (BTC_PERP del principal, XYZ_NVDA del dex xyz), la terminacion dice si es perpetuo o spot, y
-  lo que queda es el simbolo del activo. Con eso se identifican los 596 sin consultar nada.
+  Ahora se pone al dia sola al conectar, y cada 6 horas si dejas NinjaTrader abierto. Solo se te
+  avisa cuando la lista ha cambiado de verdad. Y con NinjaTrader desconectado no se pregunta
+  nada a Hyperliquid, como siempre.
 
-  Solo cambia el manual: el programa es identico al de la 0.1.8. Estrena numero porque nunca
-  puede haber dos contenidos distintos con el mismo.
+  PARA QUITAR UN MERCADO HAY QUE SABER, NO SUPONER. Que un mercado no aparezca puede ser que
+  Hyperliquid lo haya retirado o que no se haya podido preguntar, y confundir las dos cosas
+  borraria instrumentos que estan perfectamente vivos. Ahora el motor dice de que dexs ha
+  podido leer de verdad, y solo se retira de ahi.
+
+  Nunca se retira un mercado con posicion abierta, con una orden viva o con un grafico delante.
+  Ni uno tuyo: solo se tocan los que dio de alta este programa. Y si de golpe sobraran decenas,
+  no se toca nada y se dice: eso no es como retira mercados Hyperliquid, es un fallo nuestro
+  leyendo. Puedes ver que haria sin que haga nada desde la ventana de mantenimiento
+  ("Ver que cambiaria").
+
+  Y ARREGLADO "REGISTRAR BUILDER", que llevaba roto sin que se notara. Contestaba "no se pudo
+  leer del motor, esta arrancado?" -- y el motor estaba arrancado: lo que faltaba era la
+  contrasena local en la peticion. Quien pulsara ese boton se quedaba sin los mercados de los
+  dex builder (SP500, oro, acciones) y buscando el fallo donde no estaba.
 ```
 
 ---
