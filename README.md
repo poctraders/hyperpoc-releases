@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.1.8.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.1.8 - Manual.pdf` | El manual completo, 54 páginas con capturas. |
-| `hyperpoc 0.1.8.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.1.9.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.1.9 - Manual.pdf` | El manual completo, 63 páginas con capturas. |
+| `hyperpoc 0.1.9.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-4F18ADCB67AB1E8F64DC9DC196ED2562C6ED1C77A426740CF0013CD698206E55
+9FDAB98346B2523CF52AB79B32C9439BF42E63D22034FBAFDA291202F4E2641F
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.1.8.exe" SHA256
+certutil -hashfile "hyperpoc 0.1.9.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.1.8.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.1.9.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,37 +78,22 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.1.8
+## Novedades de la 0.1.9
 
 ```
-0.1.8 Beta  (14/08/2026)
-  YA NO SE TE CUELA UNA ORDEN EN UN MERCADO QUE NO PUEDES OPERAR. En Hyperliquid, el dinero de
-  cada dex es un bolsillo aparte: el saldo de tu cuenta principal no respalda posiciones de
-  otro dex. Los mercados de un dex en el que no tienes cuenta se pueden VER en un grafico pero
-  no operar, y el menu ya lo decia ("Otros dex - sin cuenta, solo grafico")... pero luego nadie
-  lo impedia. La orden salia hacia un bolsillo con 0 $, Hyperliquid la aceptaba y la anulaba, y
-  detras venia un aviso tras otro. Ahora se para antes de salir y se te dice por que.
+0.1.9 Beta  (14/08/2026)
+  EL MANUAL TRAE LA LISTA COMPLETA DE MERCADOS. Apendice B: los 596 instrumentos que instala
+  esta version, repartidos por cuenta -- 179 perpetuos y 307 spot del dex principal, 84 del dex
+  xyz, y los de hyna y para, que se pueden graficar pero no operar mientras no tengas cuenta
+  ahi. Cada uno con el apalancamiento maximo que admite, y marcados los que solo aceptan margen
+  aislado.
 
-  Las dos guardias que ya existian miraban a otro lado: la de cuenta comparaba con la cuenta
-  que le tocaba al instrumento y no habia ninguna, asi que no comparaba nada; la de margen
-  miraba el poder de compra de la cuenta desde la que metiste la orden -- la principal, que si
-  tiene dinero -- cuando lo que iba a gastar era otro bolsillo.
+  Y una clave para leer cualquier nombre sin buscarlo: el prefijo dice de que cuenta es
+  (BTC_PERP del principal, XYZ_NVDA del dex xyz), la terminacion dice si es perpetuo o spot, y
+  lo que queda es el simbolo del activo. Con eso se identifican los 596 sin consultar nada.
 
-  EL AVISO DE "NO SE HA MOVIDO LA ORDEN" YA NO TE MIENTE. Decia siempre lo mismo pasara lo que
-  pasara: "en Hyperliquid sigue donde estaba" y "causa habitual: el minimo de 10 $". Cuando
-  Hyperliquid contesta que esa orden ya esta ejecutada o cancelada, las dos cosas son falsas:
-  alli no queda ninguna orden que pueda seguir en ningun sitio, y el tamano no ha tenido nada
-  que ver. Se te pedia desconfiar de una linea del grafico que lo que necesitaba era irse.
-
-  Ahora, cuando Hyperliquid dice que la orden ya no existe, se quita de NinjaTrader (alli no se
-  toca nada) y solo se te avisa si tenias posicion abierta, que es cuando importa: acabas de
-  quedarte sin esa proteccion.
-
-  Y UN AVISO YA NO SALE SEIS VECES. Se llegaron a ver seis ventanas identicas apiladas tapando
-  la plataforma. El fallo de fondo esta arreglado arriba, pero un aviso que puede salir N veces
-  es un fallo por si mismo: nadie lee el sexto cuadro, se aprende a cerrarlos a ciegas, y el
-  dia que uno diga algo distinto tampoco se leera. Si un aviso sigue en pantalla, no se abre
-  otro igual. No se pierde nada: lo que no sale por pantalla queda en el registro.
+  Solo cambia el manual: el programa es identico al de la 0.1.8. Estrena numero porque nunca
+  puede haber dos contenidos distintos con el mismo.
 ```
 
 ---
