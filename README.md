@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.2.1.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.2.1 - Manual.pdf` | El manual completo, 65 páginas con capturas. |
-| `hyperpoc 0.2.1.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.2.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.2.2 - Manual.pdf` | El manual completo, 65 páginas con capturas. |
+| `hyperpoc 0.2.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-6D0C2A83EEC5224B170038C409D3BA4DA74EF937096F87B187788353FF443404
+142F2110B4A74417787049A643213D0A841B85C49A943F1448932A77FB7E0DEA
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.2.1.exe" SHA256
+certutil -hashfile "hyperpoc 0.2.2.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.2.1.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.2.2.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,25 +78,31 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.2.1
+## Novedades de la 0.2.2
 
 ```
-0.2.1 Beta  (14/08/2026)
-  YA NO TE ACUSA DE ALGO QUE NO HAS HECHO. Al abrir un grafico saltaba "esa cuenta no opera este
-  instrumento" sin que hubieras tocado nada. Ese aviso es para cuando eliges a mano una cuenta
-  que no puede operar el instrumento del grafico -- y ese "a mano" era una deduccion que durante
-  los primeros segundos de un grafico es falsa: NinjaTrader rellena el desplegable de cuentas y
-  elige por su cuenta mientras el grafico carga, y eso se ve igual que si lo eligieras tu.
+0.2.2 Beta  (15/08/2026)
+  UN BOTON PARA CUANDO ALGO NO VA. En el menu Inicio, dentro de "Hyperliquid para NinjaTrader 8",
+  hay una entrada nueva: "Informe para soporte". Deja en el Escritorio un unico fichero .zip con
+  todo lo que hace falta para averiguar que esta pasando -- que version tienes, donde esta cada
+  pieza, si el adapter esta bien puesto dentro de NinjaTrader, como esta tu configuracion y los
+  registros de las ultimas sesiones.
 
-  Ahora, mientras el grafico se esta colocando, la cuenta se corrige igual pero sin decirte que
-  la elegiste tu. Si la cambias tu de verdad, con el grafico ya asentado, se te sigue explicando
-  como siempre.
+  Hasta ahora, pedir ayuda era que te dictaramos rutas por correo: abre esta carpeta, busca ese
+  fichero, dime que pone. Cada vuelta era un dia. Ahora se adjunta el zip y ya esta.
 
-  EL MANUAL DICE CUANTO HISTORICO PUEDES CARGAR. Hyperliquid sirve como mucho 5.000 velas por
-  peticion, asi que subir los "Days to load" del grafico no consigue mas de lo que hay. En el
-  capitulo 15 hay una tabla con el maximo de cada temporalidad: 3,4 dias en 1 minuto, 17 dias en
-  5 minutos, 52 en 15 minutos, 208 en horario y unos 13 anos en diario. Y por que los graficos
-  de tick, rango o volumen no tienen historico de verdad.
+  TU CLAVE NO VA DENTRO, y no es una promesa: de la configuracion solo se copian los campos que
+  estan nombrados uno a uno, y cualquier otro sale sustituido por su longitud. Ademas se tacha
+  del contenido de los registros cualquier cosa con forma de clave privada o de contrasena,
+  aunque sea de hace semanas y ya no se use. Tu direccion publica si va: es publica de por si y
+  sin ella no se puede mirar nada.
+
+  Funciona con NinjaTrader CERRADO, que es justo cuando uno quiere mirar, y no se conecta a
+  Hyperliquid para hacerlo.
+
+  Y SI TIENES UN PROBLEMA, AHORA WINDOWS TE MANDA A DONDE HAY QUE IR. En "Aplicaciones
+  instaladas", este programa daba como pagina de soporte la de Hyperliquid, que no sabe nada de
+  el y no te puede ayudar.
 ```
 
 ---
