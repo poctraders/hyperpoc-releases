@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.2.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.2.2 - Manual.pdf` | El manual completo, 65 páginas con capturas. |
-| `hyperpoc 0.2.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.2.3.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.2.3 - Manual.pdf` | El manual completo, 65 páginas con capturas. |
+| `hyperpoc 0.2.3.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-142F2110B4A74417787049A643213D0A841B85C49A943F1448932A77FB7E0DEA
+90B8F119094E530A18BE41224D1338355186F4E8CC29B48CC86E3D014DD406D8
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.2.2.exe" SHA256
+certutil -hashfile "hyperpoc 0.2.3.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.2.2.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.2.3.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,31 +78,27 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.2.2
+## Novedades de la 0.2.3
 
 ```
-0.2.2 Beta  (15/08/2026)
-  UN BOTON PARA CUANDO ALGO NO VA. En el menu Inicio, dentro de "Hyperliquid para NinjaTrader 8",
-  hay una entrada nueva: "Informe para soporte". Deja en el Escritorio un unico fichero .zip con
-  todo lo que hace falta para averiguar que esta pasando -- que version tienes, donde esta cada
-  pieza, si el adapter esta bien puesto dentro de NinjaTrader, como esta tu configuracion y los
-  registros de las ultimas sesiones.
+0.2.3 Beta  (17/08/2026)
+  FUNCIONA CON NINJATRADER 8.1.8.2. Si acabas de actualizar NinjaTrader, esta es tu version.
+  Todo lo que hacia la anterior sigue haciendolo: la conexion, las dos cuentas, el menu de
+  mercados, los graficos con su plantilla y su cantidad, los indicadores y el historico.
 
-  Hasta ahora, pedir ayuda era que te dictaramos rutas por correo: abre esta carpeta, busca ese
-  fichero, dime que pone. Cada vuelta era un dia. Ahora se adjunta el zip y ya esta.
+  QUE SE HA COMPROBADO, porque "deberia funcionar" no es una comprobacion. NinjaTrader guarda
+  muchas cosas en sitios que no forman parte de su manual, y este programa tiene que ir a
+  buscarlas ahi: el desplegable de cuentas del grafico, la casilla de la cantidad, la carga de
+  plantillas. Nada de eso da error si un dia cambia de nombre -- simplemente deja de hacer su
+  trabajo, sin decir nada. Se han repasado uno a uno los diecinueve sitios de ese tipo que este
+  programa usa, y ademas la base de datos de NinjaTrader: tus mercados y tus cuentas siguen
+  donde estaban. La actualizacion de NinjaTrader no se lleva nada por delante.
 
-  TU CLAVE NO VA DENTRO, y no es una promesa: de la configuracion solo se copian los campos que
-  estan nombrados uno a uno, y cualquier otro sale sustituido por su longitud. Ademas se tacha
-  del contenido de los registros cualquier cosa con forma de clave privada o de contrasena,
-  aunque sea de hace semanas y ya no se use. Tu direccion publica si va: es publica de por si y
-  sin ella no se puede mirar nada.
-
-  Funciona con NinjaTrader CERRADO, que es justo cuando uno quiere mirar, y no se conecta a
-  Hyperliquid para hacerlo.
-
-  Y SI TIENES UN PROBLEMA, AHORA WINDOWS TE MANDA A DONDE HAY QUE IR. En "Aplicaciones
-  instaladas", este programa daba como pagina de soporte la de Hyperliquid, que no sabe nada de
-  el y no te puede ayudar.
+  Y EL AVISO DE VERSION NUEVA YA NO DICE "AL DIA" CUANDO NO LO SABE. Habia dos situaciones en
+  las que un ordenador dejaba de recibir avisos para siempre -- y las dos quedaban anotadas
+  como si todo fuera bien, que era la unica pista que habia. Ahora se distinguen. Y publicar
+  una version con un numero MENOR que el anterior, que es lo que crea esa situacion, ya no se
+  puede hacer por descuido.
 ```
 
 ---
