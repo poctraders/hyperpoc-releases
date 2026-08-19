@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.2.6.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.2.6 - Manual.pdf` | El manual completo, 65 páginas con capturas. |
-| `hyperpoc 0.2.6.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.2.7.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.2.7 - Manual.pdf` | El manual completo, 0 páginas con capturas. |
+| `hyperpoc 0.2.7.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-700CABD353B0E6649A7EFD802F331F2EEE26957A639299FF7E29EDCD006B0DF3
+881A275965536FDE2E98F7DF5A6ABD30BA5A352788DA1F299167ADDAF4069EB8
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.2.6.exe" SHA256
+certutil -hashfile "hyperpoc 0.2.7.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.2.6.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.2.7.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,26 +78,39 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.2.6
+## Novedades de la 0.2.7
 
 ```
-0.2.6 Beta  (18/08/2026)
-  EL APALANCAMIENTO YA NO ENSANCHA EL PANEL DE ORDENES. En el Chart Trader, las cifras del
-  instrumento iban todas en UNA linea seguida ("x10 Cross - 50,13 $ en mercado - 5,01 $ de tu
-  dinero - libre para abrir: 183,35 $"), y esa frase estiraba a lo ancho la columna entera con
-  la que se opera. Ahora va una cifra por renglon, con tres renglones reservados de alto: el
-  rotulo crece hacia abajo y ya no puede deformar el panel. Ademas tiene un tope de ancho duro
-  contra el selector de cuenta, asi que pase lo que pase con el texto, la columna se queda como
-  esta.
+0.2.7 Beta  (18/08/2026)
+  LA VENTANA DE "HAY UNA VERSION NUEVA", CON TRES BOTONES QUE HACEN LO QUE DICEN.
 
-  Y EL ALTO NO CAMBIA AL ABRIR O CERRAR UNA POSICION, que era lo otro que molestaba: como el
-  hueco esta reservado, los botones de debajo dejan de moverse mientras operas.
+  DESCARGAR ya no te deja en la pagina buscando el fichero: le da a tu navegador el enlace
+  del instalador y la descarga empieza sola. Antes de pulsar, la ventana te dice QUE fichero
+  va a bajar y CUANTO PESA. Sigue sin bajarlo ni ejecutarlo este programa: lo guarda tu
+  navegador, con su aviso de descarga, y lo abres tu. Y NinjaTrader se cierra, como siempre,
+  porque el instalador no puede sustituir ficheros que estan en uso.
 
-  UN MENSAJE DEL REGISTRO QUE DECIA UNA COSA POR OTRA. Al segundo de una compra buena podia
-  aparecer "el lado no coincide (NinjaTrader Long, Hyperliquid Short)" cuando Hyperliquid no
-  estaba corto: es que todavia no tenia la posicion. No cambiaba nada de lo que hace el
-  programa -- el aviso se descarta solo a los 45 s, y para eso esta --, pero un diagnostico que
-  se inventa el lado de una posicion es peor que uno que dice "aun no lo se". Ahora lo dice.
+  RECORDARMELO MAS TARDE ahora son TRES DIAS de verdad. Antes no anotaba nada, asi que si
+  abrias y cerrabas NinjaTrader tres veces en una manana veias el mismo cartel tres veces --
+  la mejor forma de acabar cerrandolo sin leerlo. Si mientras tanto sale una version
+  POSTERIOR, se te avisa igual: aplazar una no tapa la siguiente.
+
+  CANCELAR calla el aviso hasta que vuelvas a abrir NinjaTrader. No anota nada en ningun
+  sitio. Cerrar la ventana con la X hace lo mismo.
+
+  Se va el boton de "descartar esta version", que anotaba en disco una version y no volvia a
+  mencionarla nunca. Si no quieres saber nada de las actualizaciones, la casilla de "Acerca
+  de" lo apaga entero -- y esa se ve y se puede volver a encender.
+
+  Y el enlace verde de la ventana lleva a la pagina de la version, que es donde estan las
+  notas y el SHA256 si quieres comprobarlo. Ese no cierra NinjaTrader ni la ventana.
+
+  UN SOLO ICONO DE NINJATRADER EN EL ESCRITORIO. El icono que instala este programa abre
+  NinjaTrader haciendo antes la revision que deja su base de datos coherente con Hyperliquid.
+  La idea era que sustituyera al de NinjaTrader; en realidad se quedaban los dos, uno al lado
+  del otro, y la mitad de las veces se pulsaba el que se salta esa revision. Ahora el viejo se
+  quita al instalar. Si desinstalas hyperpoc, se te devuelve: no vas a quedarte sin forma de
+  abrir NinjaTrader por haber quitado esto.
 ```
 
 ---
