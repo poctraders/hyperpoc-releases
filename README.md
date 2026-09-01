@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.2.8.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.2.8 - Manual.pdf` | El manual completo, 68 páginas con capturas. |
-| `hyperpoc 0.2.8.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.3.1.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.3.1 - Manual.pdf` | El manual completo, 68 páginas con capturas. |
+| `hyperpoc 0.3.1.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-A95A0E819006145821B79EF6E6A74342BBBB69DB2377CC27383880CAB0EAE676
+BEE094222D75090338BE683355DDEAAC41A25E38A045B8A4813B4D04AA98E805
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.2.8.exe" SHA256
+certutil -hashfile "hyperpoc 0.3.1.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.2.8.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.3.1.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,13 +78,45 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.2.8
+## Novedades de la 0.3.1
 
 ```
-0.2.8 Beta  (19/08/2026)
-  QUIEN HA HECHO ESTO, EN "ACERCA DE". La ventana ya decia la version, la web y el correo,
-  pero no los nombres de quienes estan detras. Ahora, justo encima del copyright, aparece
-  "Creado por Jose J. Lopez y Miguel Angel de Haro".
+0.3.1 Beta  (02/09/2026)
+  CATORCE DIAS DE PRUEBA, Y DESPUES LICENCIA. Esta es la primera version que pide licencia
+  para operar. La prueba no hay que activarla ni pedirla: empieza sola la primera vez que
+  abres el programa y dura catorce dias completos, sin registrarse, sin dar un correo y sin
+  ninguna limitacion mientras dura.
+
+  CUANDO SE ACABA, LO UNICO QUE DEJA DE PODERSE ES ABRIR POSICION NUEVA. Cerrar, reducir y
+  cancelar siguen funcionando siempre, pase lo que pase con la licencia: un stop, un
+  objetivo, una cancelacion y el boton Close salen igual con la prueba agotada que el primer
+  dia. Dejar a alguien encerrado dentro de una posicion con dinero real para cobrarle una
+  licencia no es una forma aceptable de cobrar. Se cobra impidiendo entrar, nunca impidiendo
+  salir.
+
+  Y SI ALGO NO SE PUEDE COMPROBAR, SE DEJA OPERAR. Si el fichero no se deja leer, si el
+  registro de Windows esta restringido por una directiva, o si falla cualquier otra cosa de
+  nuestro lado, el programa NO concluye que no tienes licencia: te deja seguir. Un fallo
+  nuestro no puede convertirse en un cliente que se queda sin poder operar.
+
+  ACTIVAR LA LICENCIA ES PEGARLA, NO BUSCAR UNA CARPETA. En la ventana de conexion hay un
+  boton nuevo, "Activar licencia...". Se abre, se pega entero el bloque que te mandamos, se
+  pulsa Activar y ya esta: no tienes que encontrar ninguna carpeta ni copiar ningun fichero
+  a mano. Se comprueba ANTES de guardar nada, asi que un bloque mal pegado te lo dice en el
+  momento en vez de dejarte peor de lo que estabas.
+
+  EL ID DE INSTALACION, CON SU BOTON DE COPIAR, en esa misma ventana y tambien en "Acerca
+  de". Es lo unico que tienes que mandarnos para que te emitamos la licencia.
+
+  UNA LICENCIA, DOS ORDENADORES. Se emite para dos IDs de instalacion -- el de sobremesa y
+  el portatil, por ejemplo -- y el mismo bloque sirve en los dos.
+
+  EL CONTADOR DE LA PRUEBA, EN "ACERCA DE", en dias y horas. El ultimo dia es justo el que
+  importa: "queda 1 dia" pueden ser veintitres horas o veinte minutos, y no se decide lo
+  mismo. Cuando ya hay licencia, ese mismo renglon dice a nombre de quien esta.
+
+  Y SE AVISA UNA VEZ AL CONECTAR, solo cuando la prueba acaba de empezar o cuando ya se ha
+  agotado. Una vez por sesion, y nunca si tienes licencia.
 ```
 
 ---
