@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.3.4.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.3.4 - Manual.pdf` | El manual completo, 68 páginas con capturas. |
-| `hyperpoc 0.3.4.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.3.5.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.3.5 - Manual.pdf` | El manual completo, 68 páginas con capturas. |
+| `hyperpoc 0.3.5.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-4DD6B0A5CB0B73BE6B8FE60AC11EDFC962EFE31330F4D91D90831C4FDD19972D
+4A9A9F25CB0777CB57E7F251B24BC37692AED82EA955E705EC500FA2EFE3B112
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.3.4.exe" SHA256
+certutil -hashfile "hyperpoc 0.3.5.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.3.4.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.3.5.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,25 +78,28 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.3.4
+## Novedades de la 0.3.5
 
 ```
-0.3.4 Beta  (02/09/2026)
-  POR DENTRO, Y SIN CAMBIAR NADA DE LO QUE VES. La parte que decide QUE se le manda
-  exactamente a Hyperliquid -el tamano que sale de convertir tus dolares al precio, la marca
-  de "esta orden solo puede cerrar", la fraccion de la posicion que cubre un stop, el minimo
-  de 10 $ y la vigencia de la orden- estaba metida dentro del puente, entre otras doscientas
-  lineas. Eso significaba que esas cinco cosas, que son las que mas caro salen si fallan,
-  solo se podian comprobar mandando ordenes de verdad.
+0.3.5 Beta  (03/09/2026)
+  UNA POSICION QUE NO EXISTE YA NO PUEDE PASAR DESAPERCIBIDA. El programa vigila que lo que
+  ves en NinjaTrader sea lo que de verdad tienes en Hyperliquid, y avisa (y lo corrige) si no
+  cuadra. Ese vigilante tenia un punto ciego: cuando el mercado tenia un grafico abierto -o
+  sea, justo cuando lo estas operando-, una posicion de VENTA que en Hyperliquid ya no existia
+  podia quedarse en pantalla sin que nadie dijera nada. Con sus stops encima, protegiendo algo
+  que no esta. Corregido: una posicion que no esta se dice que no esta, se vea el grafico o no.
 
-  Ahora estan aparte y se les hacen 25 preguntas en cada entrega, sin abrir NinjaTrader y
-  sin gastar un centimo. Entre ellas, casos que con dinero real serian caros o imposibles de
-  provocar a voluntad: un importe que al redondearse daria un tamano de cero, y un stop
-  puesto sobre una posicion mas pequena que el minimo de la casa, que tiene que poder
-  ponerse igual.
+  Dos arreglos mas en el mismo vigilante:
+  - el aviso solo salta si el descuadre es EL MISMO durante 45 segundos seguidos. Antes dos
+    descuadres pasajeros distintos podian sumarse y disparar una correccion que no tocaba;
+  - cuando Hyperliquid tiene una posicion que NinjaTrader no muestra y no da el precio de
+    entrada, el aviso decia "una posicion de 0,00 $". Ahora dice el tamano de verdad.
 
-  El comportamiento es el mismo que en la 0.3.3: no se ha cambiado ninguna regla, se ha
-  movido a donde se puede comprobar.
+  Y por dentro: toda esa comparacion estaba metida en el puente, donde para comprobar un solo
+  caso hacia falta NinjaTrader abierto, conexion, dinero y ademas conseguir que se descuadrara.
+  Ahora esta aparte y se le hacen 34 preguntas en cada entrega, sin abrir el programa y sin
+  gastar un centimo: el llenado parcial, el mercado que no se ha podido leer, la posicion
+  abierta desde la web con NinjaTrader plano.
 ```
 
 ---
