@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.3.3.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.3.3 - Manual.pdf` | El manual completo, 68 páginas con capturas. |
-| `hyperpoc 0.3.3.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.3.4.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.3.4 - Manual.pdf` | El manual completo, 68 páginas con capturas. |
+| `hyperpoc 0.3.4.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-B31DFFD65866633C08A7EE1BD994C88145DA467619A430918C442981B466639F
+4DD6B0A5CB0B73BE6B8FE60AC11EDFC962EFE31330F4D91D90831C4FDD19972D
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.3.3.exe" SHA256
+certutil -hashfile "hyperpoc 0.3.4.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.3.3.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.3.4.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,20 +78,25 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.3.3
+## Novedades de la 0.3.4
 
 ```
-0.3.3 Beta  (02/09/2026)
-  UNA ORDEN YA NO ESPERA AL DISCO. Al mandar una orden, el programa comprobaba la licencia
-  leyendo su fichero en ese mismo instante. En un ordenador normal eso no se nota; en uno
-  con la carpeta Documentos sincronizada con OneDrive, un fichero convertido en marcador de
-  posicion puede tardar SEGUNDOS en abrirse la primera vez, y esos segundos se los comia el
-  envio de la orden. Ahora la comprobacion se recuerda medio minuto, asi que el disco ya no
-  esta en ese camino. Si acabas de activar una licencia, el cambio se aplica al instante:
-  activar borra lo recordado.
+0.3.4 Beta  (02/09/2026)
+  POR DENTRO, Y SIN CAMBIAR NADA DE LO QUE VES. La parte que decide QUE se le manda
+  exactamente a Hyperliquid -el tamano que sale de convertir tus dolares al precio, la marca
+  de "esta orden solo puede cerrar", la fraccion de la posicion que cubre un stop, el minimo
+  de 10 $ y la vigencia de la orden- estaba metida dentro del puente, entre otras doscientas
+  lineas. Eso significaba que esas cinco cosas, que son las que mas caro salen si fallan,
+  solo se podian comprobar mandando ordenes de verdad.
 
-  Por dentro: la guardia de margen se comprueba ahora en cada entrega, junto a las dos de
-  licencia. Estaba escrita desde hace tiempo y no la ejecutaba nadie.
+  Ahora estan aparte y se les hacen 25 preguntas en cada entrega, sin abrir NinjaTrader y
+  sin gastar un centimo. Entre ellas, casos que con dinero real serian caros o imposibles de
+  provocar a voluntad: un importe que al redondearse daria un tamano de cero, y un stop
+  puesto sobre una posicion mas pequena que el minimo de la casa, que tiene que poder
+  ponerse igual.
+
+  El comportamiento es el mismo que en la 0.3.3: no se ha cambiado ninguna regla, se ha
+  movido a donde se puede comprobar.
 ```
 
 ---
