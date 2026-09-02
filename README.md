@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.3.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.3.2 - Manual.pdf` | El manual completo, 68 páginas con capturas. |
-| `hyperpoc 0.3.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.3.3.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.3.3 - Manual.pdf` | El manual completo, 68 páginas con capturas. |
+| `hyperpoc 0.3.3.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-5ABCC9DD15285ED8654239FD2C326F0B1CB2580C4B5FB7D805516A294E1DFB96
+B31DFFD65866633C08A7EE1BD994C88145DA467619A430918C442981B466639F
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.3.2.exe" SHA256
+certutil -hashfile "hyperpoc 0.3.3.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.3.2.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.3.3.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,30 +78,20 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.3.2
+## Novedades de la 0.3.3
 
 ```
-0.3.2 Beta  (02/09/2026)
-  LA CLAVE DE ADMINISTRADOR, UNA VEZ METIDA, SE QUEDA EN EL ORDENADOR. Hasta ahora toda la
-  activacion colgaba de un unico fichero: bastaba borrar la carpeta de datos, reinstalar
-  desde cero o pegar cualquier otra cosa encima para quedarse fuera y tener que volver a
-  pedir la clave. "Activado" no puede significar "mientras ese fichero siga ahi". Ahora,
-  al aceptarla, queda anotado en el propio ordenador, y ese equipo sigue activado aunque el
-  fichero desaparezca, aunque se desinstale y se vuelva a instalar, y sin fecha de
-  caducidad.
+0.3.3 Beta  (02/09/2026)
+  UNA ORDEN YA NO ESPERA AL DISCO. Al mandar una orden, el programa comprobaba la licencia
+  leyendo su fichero en ese mismo instante. En un ordenador normal eso no se nota; en uno
+  con la carpeta Documentos sincronizada con OneDrive, un fichero convertido en marcador de
+  posicion puede tardar SEGUNDOS en abrirse la primera vez, y esos segundos se los comia el
+  envio de la orden. Ahora la comprobacion se recuerda medio minuto, asi que el disco ya no
+  esta en ese camino. Si acabas de activar una licencia, el cambio se aplica al instante:
+  activar borra lo recordado.
 
-  NO DEPENDE DEL ID DE INSTALACION, ni para meterla ni para conservarla. Funciona igual en
-  un equipo donde ese ID ni siquiera se puede calcular -- los hay, con el registro de
-  Windows restringido por directiva --, que era justo donde antes fallaba.
-
-  Y UNA LICENCIA COMPRADA MANDA POR ENCIMA. Si en ese mismo ordenador se activa despues una
-  licencia de verdad, "Acerca de" pasa a enseñar el nombre de su titular. Lo que se ha
-  pagado no se queda tapado detras de una clave de pruebas.
-
-  La anotacion va sellada y no lleva la clave dentro: escribirla a mano no activa nada, y
-  quien mire ahi no saca de ella ninguna clave. El informe de soporte dice ahora si el
-  ordenador esta en ese estado, para no salir a buscar un problema de licencia que no
-  existe.
+  Por dentro: la guardia de margen se comprueba ahora en cada entrega, junto a las dos de
+  licencia. Estaba escrita desde hace tiempo y no la ejecutaba nadie.
 ```
 
 ---
