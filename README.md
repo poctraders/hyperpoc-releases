@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.3.6.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.3.6 - Manual.pdf` | El manual completo, 68 páginas con capturas. |
-| `hyperpoc 0.3.6.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.3.8.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.3.8 - Manual.pdf` | El manual completo, 71 páginas con capturas. |
+| `hyperpoc 0.3.8.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-594F630833035E64C31AD96B1DBB5B7E1246957BD69DB2B316D3FE9D74F8582D
+D06136FEAC23D87C1226E971B12739874F60873D426FF4208B20CB5F2244DC1C
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.3.6.exe" SHA256
+certutil -hashfile "hyperpoc 0.3.8.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.3.6.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.3.8.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,24 +78,20 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.3.6
+## Novedades de la 0.3.8
 
 ```
-0.3.6 Beta  (04/09/2026)
-  YA PUEDES CAMBIAR TU CLAVE SIN SALIR DEL PROGRAMA. En Hyperliquid Poctraders > Acerca de...
-  hay un boton nuevo, "Renovar clave". Abre la caja donde pegar una clave: sirve para meter
-  una nueva, para volver a poner la de siempre, o para QUITAR la que tengas. Hasta ahora la
-  unica puerta estaba escondida en Conexion > Configurar..., o aparecia sola cuando el
-  programa ya te estaba frenando: para meter una clave habia que tener un problema.
+0.3.8 Beta  (09/09/2026)
+  IMAGEN NUEVA. El menu del Control Center ya no se llama "Hyperliquid Poctraders": ahora es
+  HyperPoc, con su icono delante. Y la ventana "Acerca de" estrena el logotipo nuevo.
 
-  QUE PASA SI QUITAS LA CLAVE. El programa vuelve a la prueba gratuita con LOS DIAS QUE TE
-  QUEDARAN de tus 14 originales, no con catorce nuevos. Si esa prueba ya se agoto, el
-  ordenador queda en solo lectura: puedes cerrar posiciones, reducirlas y cancelar ordenes
-  -- eso no se bloquea nunca -- pero no abrir posiciones nuevas. Quitarla pide dos clics, y
-  el primero te dice exactamente lo que va a pasar antes de hacerlo.
+  El icono y el logotipo estan hechos para no descuadrarse nunca: el icono mide exactamente
+  lo que mide la letra del menu -- va atado al tamano de la fuente, no a un numero escrito a
+  mano --, asi que sigue al skin de NinjaTrader y a la escala de Windows sin quedarse enano
+  ni salirse. Y ninguna de las dos imagenes se deforma al cambiar de tamano: se guardan a
+  mas resolucion de la que se dibuja, para que al 150 % o al 200 % se vean nitidas.
 
-  Y si algo impidiera quitarla del todo, el programa NO te dice que la ha quitado: te avisa
-  de que el ordenador puede seguir abierto. Un "hecho" que no es verdad es peor que un fallo.
+  El manual va al dia con el nombre nuevo, entrada por entrada.
 ```
 
 ---
