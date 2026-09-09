@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.3.8.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.3.8 - Manual.pdf` | El manual completo, 71 páginas con capturas. |
-| `hyperpoc 0.3.8.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.3.9.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.3.9 - Manual.pdf` | El manual completo, 71 páginas con capturas. |
+| `hyperpoc 0.3.9.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-D06136FEAC23D87C1226E971B12739874F60873D426FF4208B20CB5F2244DC1C
+44A8050CFA38F9A22E19B64ABA5321834BDF88BED17024130D7962A1037C8D0B
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.3.8.exe" SHA256
+certutil -hashfile "hyperpoc 0.3.9.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.3.8.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.3.9.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,20 +78,26 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.3.8
+## Novedades de la 0.3.9
 
 ```
-0.3.8 Beta  (09/09/2026)
-  IMAGEN NUEVA. El menu del Control Center ya no se llama "Hyperliquid Poctraders": ahora es
-  HyperPoc, con su icono delante. Y la ventana "Acerca de" estrena el logotipo nuevo.
+0.3.9 Beta  (09/09/2026)
+  MOVER UNA ORDEN YA NO PUEDE PROVOCAR UN REDIBUJADO DE LA PANTALLA. El programa vigila
+  continuamente que las ordenes que ves en NinjaTrader sean las que de verdad tienes en
+  Hyperliquid: quita las que alli ya no existen, y si Hyperliquid tiene alguna que no ves,
+  reconstruye la pantalla desde cero para reflejarla.
 
-  El icono y el logotipo estan hechos para no descuadrarse nunca: el icono mide exactamente
-  lo que mide la letra del menu -- va atado al tamano de la fuente, no a un numero escrito a
-  mano --, asi que sigue al skin de NinjaTrader y a la escala de Windows sin quedarse enano
-  ni salirse. Y ninguna de las dos imagenes se deforma al cambiar de tamano: se guardan a
-  mas resolucion de la que se dibuja, para que al 150 % o al 200 % se vean nitidas.
+  El problema estaba en como funciona mover una orden. Hyperliquid no la mueve: la cancela y
+  coloca otra nueva, con otro numero. Si tardaba un momento en dejar de listar la vieja, el
+  vigilante la tomaba por "una orden que Hyperliquid tiene y NinjaTrader no enseña" y
+  reconstruia la pantalla entera sin necesidad. Ese numero esta muerto por definicion --lo
+  acaba de retirar el propio programa al mover la orden-- y ahora se sabe.
 
-  El manual va al dia con el nombre nuevo, entrada por entrada.
+  Y por dentro: toda esa comparacion estaba metida en el puente, donde para comprobar un solo
+  caso hacian falta NinjaTrader abierto, conexion, ordenes reales y ademas conseguir que se
+  descuadraran. Ahora esta aparte y se le hacen 24 preguntas en cada entrega, sin abrir el
+  programa: la orden recien enviada que todavia no aparece, la que se ejecuto hace un segundo,
+  la que esta a mitad de movimiento, y la que Hyperliquid tiene puesta desde la web.
 ```
 
 ---
