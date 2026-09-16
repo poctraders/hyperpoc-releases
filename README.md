@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.3.9.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.3.9 - Manual.pdf` | El manual completo, 71 páginas con capturas. |
-| `hyperpoc 0.3.9.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.4.0.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.4.0 - Manual.pdf` | El manual completo, 71 páginas con capturas. |
+| `hyperpoc 0.4.0.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-44A8050CFA38F9A22E19B64ABA5321834BDF88BED17024130D7962A1037C8D0B
+0E667E616BE6E535D04F8D8B5F05CBA5CF378A14A6767D4B11340615AB59946C
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.3.9.exe" SHA256
+certutil -hashfile "hyperpoc 0.4.0.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.3.9.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.4.0.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,26 +78,52 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.3.9
+## Novedades de la 0.4.0
 
 ```
-0.3.9 Beta  (09/09/2026)
-  MOVER UNA ORDEN YA NO PUEDE PROVOCAR UN REDIBUJADO DE LA PANTALLA. El programa vigila
-  continuamente que las ordenes que ves en NinjaTrader sean las que de verdad tienes en
-  Hyperliquid: quita las que alli ya no existen, y si Hyperliquid tiene alguna que no ves,
-  reconstruye la pantalla desde cero para reflejarla.
+0.4.0 Beta  (16/09/2026)
+  SACAR UN TROZO DE LA POSICION. Cerrarla entera funcionaba: el boton Close le pide a
+  Hyperliquid que cierre la posicion EXACTA, y eso no falla nunca. Sacar solo una parte,
+  no. Podia dejar la posicion en un tamano que no era el que tocaba, y en el peor caso
+  abrir una posicion nueva del lado contrario. Arreglado, y por los dos lados.
 
-  El problema estaba en como funciona mover una orden. Hyperliquid no la mueve: la cancela y
-  coloca otra nueva, con otro numero. Si tardaba un momento en dejar de listar la vieja, el
-  vigilante la tomaba por "una orden que Hyperliquid tiene y NinjaTrader no enseña" y
-  reconstruia la pantalla entera sin necesidad. Ese numero esta muerto por definicion --lo
-  acaba de retirar el propio programa al mover la orden-- y ahora se sabe.
+  EN HYPERLIQUID. La cantidad que escribes en NinjaTrader son los DOLARES QUE METISTE,
+  valorados al precio al que entraste. Al sacar un trozo a mercado, el programa convertia
+  esos dolares a tamano con el precio de AHORA -- que ya no es el mismo -- y mandaba la
+  orden sin decirle a Hyperliquid que solo podia CERRAR. Con el precio en contra, esa
+  cuenta se pasaba de la posicion entera: la cruzaba y abria la contraria. Sacar "los
+  200 $ que meti" de una posicion larga que habia bajado un 10 % dejaba un corto.
 
-  Y por dentro: toda esa comparacion estaba metida en el puente, donde para comprobar un solo
-  caso hacian falta NinjaTrader abierto, conexion, ordenes reales y ademas conseguir que se
-  descuadraran. Ahora esta aparte y se le hacen 24 preguntas en cada entrega, sin abrir el
-  programa: la orden recien enviada que todavia no aparece, la que se ejecuto hace un segundo,
-  la que esta a mitad de movimiento, y la que Hyperliquid tiene puesta desde la web.
+  Ahora una salida a mercado le dice a Hyperliquid QUE FRACCION de la posicion quieres
+  sacar, y el tamano lo pone Hyperliquid contra tu posicion real. La mitad es la mitad.
+  Y va marcada como de solo cierre: no puede abrir nada, pase lo que pase con el precio.
+  Es el mismo mecanismo que ya usaban el stop y el objetivo desde hace meses.
+
+  EN NINJATRADER. Si tenias 200 $ con un stop de 200 $ y sacabas 100 $, te quedaba la
+  posicion en 100 $ y el stop en 200 $. El dia que saltaba ese stop, NinjaTrader vendia
+  los 200 contra los 100 que quedaban y te dejaba CORTO de 100 $ -- una posicion que no
+  habias pedido. En Hyperliquid eso no llegaba a pasar (alli el stop es de solo cierre y
+  se para en tu posicion), asi que las dos pantallas acababan contando cosas distintas y
+  el programa terminaba reconstruyendo la suya.
+
+  Ahora, en cuanto la posicion mengua, el stop y el objetivo se ajustan solos a lo que
+  queda. No pierdes proteccion: se quedan exactamente en la cifra que Hyperliquid iba a
+  ejecutar de todas formas. Y las ordenes de REVERSION -- las que pones a proposito mas
+  grandes que la posicion para darle la vuelta de un golpe -- se quedan como estan: esas
+  si pueden abrir, y para eso las pusiste.
+
+  Por dentro: las dos decisiones estan fuera del puente y se les hacen 46 preguntas en
+  cada entrega, sin abrir el programa ni gastar un centimo. Y una mas en vivo, con dinero
+  de verdad: abrir 24 $, ponerle stop y objetivo, sacar 12 $ y comprobar contra la propia
+  Hyperliquid que los tres numeros se quedan en 12.
+
+  TU LICENCIA SE GESTIONA EN UN SOLO SITIO: HyperPoc > Acerca de. Alli esta el estado de
+  tu licencia, el boton para meter una clave nueva o quitar la que tengas, y tu ID de
+  instalacion con su boton de copiar. Habia un segundo boton de licencia dentro de
+  Conexion > Configurar, y no pintaba nada ahi: con que wallet firmas en Hyperliquid y
+  que licencia tienes de HyperPoc son dos cosas que no se parecen en nada, y verlas
+  juntas hacia pensar que configurar la conexion era un tramite de tres pasos. Ese boton
+  se ha quitado; la ventana de conexion es ahora lo que dice ser.
 ```
 
 ---
