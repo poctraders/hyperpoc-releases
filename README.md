@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.4.1.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.4.1 - Manual.pdf` | El manual completo, 71 páginas con capturas. |
-| `hyperpoc 0.4.1.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.4.2.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.4.2 - Manual.pdf` | El manual completo, 71 páginas con capturas. |
+| `hyperpoc 0.4.2.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-CB638A393D5B854F091AAE7317F9311B825E69C6FC2A8EBED756C73A58686202
+0C11EA91B222B619FF7D73093690C3EABAB358AF0D03D21CF914A5F2989C2E63
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.4.1.exe" SHA256
+certutil -hashfile "hyperpoc 0.4.2.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.4.1.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.4.2.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,61 +78,67 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.4.1
+## Novedades de la 0.4.2
 
 ```
-0.4.1 Beta  (16/09/2026)
-  SEIS ARREGLOS DEL CAMINO DE LAS ORDENES, salidos de revisar el codigo caso por caso.
-  Tres de ellos podian costar dinero.
+0.4.2 Beta  (16/09/2026)
+  SEIS ARREGLOS MAS DEL CAMINO DE LAS ORDENES. Tres los encontro un betatester operando y
+  tres salieron de revisar a fondo el codigo. Cuatro de ellos podian costar dinero.
 
-  TU STOP YA NO PUEDE SALIR SIN PROTECCION. Cuando una estrategia ATM coloca el stop y el
-  objetivo, lo hace en el mismo instante en que se llena la entrada -- y NinjaTrader tarda
-  unos milisegundos en dar la posicion por abierta. En ese hueco el programa miraba, veia
-  la cuenta plana, y mandaba el stop SIN la marca de "esto solo puede cerrar". Un stop asi,
-  si salta cuando ya has sacado un parcial, no se para: abre la posicion contraria. Ahora
-  la posicion se mira DOS veces, la segunda justo antes de enviar, y basta que una de las
-  dos la vea para tratar la orden como lo que es.
+  MODIFICAR UNA ORDEN A MEDIO EJECUTAR YA NO REPONE LO YA EJECUTADO. Es el mas caro de
+  todos. Cuando mueves una orden, Hyperliquid no la ajusta: la cancela y coloca otra del
+  tamano que se le diga. El programa le mandaba el tamano ORIGINAL, no lo que quedaba vivo.
+  Asi que mover una limitada de 30.000 $ llena por la mitad dejaba 30.000 $ vivos otra vez,
+  con 15.000 $ ya en la posicion: el doble de exposicion de la que creias tener, sin un solo
+  aviso. Ahora va lo que queda. Y el ajuste automatico de stops y objetivos, que tenia las
+  ordenes a medio llenar excluidas, ya las tiene en cuenta.
 
-  Y LO MISMO AL CAMBIARLE LA CANTIDAD A UN STOP. Si una ATM baja su stop porque acaba de
-  llenarse un objetivo parcial, el programa calculaba la parte a cubrir con la posicion de
-  antes: el stop acababa cubriendo la mitad de lo que quedaba, sin decirlo. Mismo arreglo,
-  misma segunda mirada.
+  UNA ORDEN LLAMADA "CLOSE ALGO" YA NO CIERRA LA POSICION ENTERA. El boton Close del Chart
+  Trader crea una orden llamada "Close", y esas cierran la posicion exacta sin mirar la
+  cantidad. El programa aceptaba CUALQUIER nombre que empezara por Close -- y los nombres
+  de orden los pone quien las manda: en una estrategia, "CloseLong" o "CloseSignal" son
+  nombres corrientes. Una orden de 10 $ llamada asi cerraba una posicion de 500 $. Ahora el
+  nombre tiene que ser exacto, y no se pierde nada: una salida del tamano de la posicion ya
+  cierra igual de exacto por el camino normal.
 
-  VARIAS SALIDAS QUE JUNTAS NO CABEN. Dos objetivos escalonados de 16 $ sobre una posicion
-  de 24 $ caben por separado y no juntos; si llenaban los dos, NinjaTrader vendia 32 contra
-  24 y te dejaba corto de 8 sin que lo hubieras pedido. Ahora se mira tambien la SUMA -- y
-  con cuidado: un stop y su objetivo se cancelan entre ellos, asi que cuentan una sola vez.
-  Una ATM de dos objetivos bien puesta no se toca.
+  SI UN MOVIMIENTO NO LLEGA A HYPERLIQUID, AHORA TE ENTERAS. Habia cuatro formas de que
+  mover una orden no llegara -- sin enlace con la orden de alla, sin precio valido, con un
+  tamano que redondea a cero, o con la orden ya llena -- y las cuatro se quedaban en el
+  registro. Tu arrastrabas el stop, lo veias donde lo habias puesto, y en Hyperliquid seguia
+  donde estaba. Ahora las cuatro lo dicen en pantalla.
 
-  EN SPOT YA NO SE PUEDE VENDER LO QUE NO TIENES. El mecanismo que reparte la posicion al
-  sacar un parcial solo funciona en perpetuos: en spot no hay posiciones que consultar, asi
-  que el tamano lo ponia una conversion al precio de AHORA, que ya no es el de tu entrada.
-  Ahora la salida lleva las mismas unidades que NinjaTrader se esta quitando, y ademas se
-  recorta al saldo que de verdad tienes: una orden de mas era un rechazo de Hyperliquid con
-  NinjaTrader dandola ya por hecha.
+  Y SI UNA CANCELACION NO LLEGA, TAMBIEN. El programa mandaba la cancelacion y seguia sin
+  mirar si Hyperliquid la habia aceptado; si el motor estaba caido, se tragaba el fallo. La
+  orden desaparecia de NinjaTrader y en Hyperliquid seguia puesta, viva y lista para
+  ejecutarse. Ahora se mira la respuesta, y si no se puede confirmar se avisa -- sin afirmar
+  que sigue puesta, porque no se sabe: se te manda a mirarlo.
 
-  AMPLIAR UNA POSICION YA NO REDIBUJA LA PANTALLA SIN MOTIVO. El programa compara lo que ve
-  NinjaTrader con lo que tiene Hyperliquid y, si no cuadran, reconstruye la pantalla. Entre
-  las dos cuentas hay siempre un redondeo por CADA orden, y el margen solo daba para uno:
-  al ampliar una posicion en dos o tres entradas los redondeos se sumaban y el margen no,
-  asi que saltaba un descuadre que no existia -- con su reconstruccion detras, en mitad de
-  la operativa. Ahora el margen crece con las ordenes que han construido la posicion, con
-  tope, para no dejar de ver un llenado parcial de verdad.
+  CUANDO HYPERLIQUID RECHAZA UN STOP, EL AVISO YA NO MIENTE. Decia siempre "NO tienes esa
+  posicion". Para una entrada rechazada es verdad; para un stop rechazado es falso, y falso
+  por el lado que hace dano: la posicion sigue abierta y lo que no esta puesto es la
+  proteccion. Leias que no tenias nada y lo que tenias era dinero expuesto sin stop. Ahora
+  el aviso distingue las dos cosas.
 
-  Y CUANDO HYPERLIQUID RECHAZA POR LA VIGENCIA, AHORA SE DICE DONDE SE ARREGLA. Hyperliquid
-  solo admite GTC e IOC, y muchas plantillas de NinjaTrader traen "Day" de fabrica: con eso
-  puesto no sale NI UNA orden. El aviso explicaba la causa pero no el gesto; ahora dice
-  exactamente que desplegable hay que tocar, y avisa de que si se repite en todas las
-  ordenes es que la plantilla viene asi.
+  Y SI NINJATRADER VA A TROCEARTE LAS ORDENES, TE LO DICE AL CONECTAR. NinjaTrader tiene una
+  opcion de simulador, "Enforce partial fills", que en vez de llenar una orden entera cuando
+  el precio la toca la va llenando contra el volumen. Con tres contratos de un futuro son
+  tres apuntes y es realista; aqui las cantidades son DOLARES, asi que una orden de 30.000 $
+  son treinta mil lotes -- y acabas viendo miles de ejecuciones de un dolar para una sola
+  orden. En Hyperliquid tu orden es UNA y se comporta con normalidad: lo que se trocea es lo
+  que NinjaTrader ensena. El programa lo detecta y te dice donde se apaga. No se toca la
+  configuracion de nadie: es una opcion legitima y hay quien la quiere.
 
-  Dos sospechas mas se revisaron y resultaron NO serlo, y queda dicho aqui porque el
-  proximo que mire no tenga que volver a mirarlo: el vinculo entre un stop y su objetivo
-  sobrevive al ajuste automatico (comprobado en vivo), y un take-profit limitado puesto
-  desde la web de Hyperliquid recupera su limite al reconectar.
+  Y SI EL MOTOR QUE FIRMA LLEVA UNA CONFIGURACION VIEJA, AHORA SE DICE. El motor arranca y
+  se para con NinjaTrader, pero si NinjaTrader se cierra mal -- un cuelgue, el Administrador
+  de tareas -- el motor sobrevive, y al volver a abrir se reaprovecha el que ya estaba. Ese
+  motor lleva cargada la configuracion que leyo al arrancar: si entre medias has cambiado tu
+  API wallet o de red, seguiria con la de antes, con la conexion en verde y sin que nada lo
+  dijera. Ahora se detecta al conectar y se te dice que cierres NinjaTrader del todo. No se
+  bloquea nada: quedarte sin poder cerrar una posicion por un problema nuestro seria peor.
 
-  Por dentro: 122 preguntas en seco entre las nueve suites, dos mandos de prueba nuevos
-  para poder volver a medir el caso del OCO, y la regresion en vivo del parcial repetida
-  sobre esta version.
+  Por dentro: una revision NUEVA de punta a punta con dinero real (tools\revision_total.ps1)
+  que encadena abrir, proteger, sacar dos trozos, ampliar, mover y cerrar -- por los dos
+  lados -- comprobando cada paso contra la API publica de Hyperliquid.
 ```
 
 ---
