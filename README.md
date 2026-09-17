@@ -13,21 +13,21 @@ Esta página es solo de descargas. El código fuente no está aquí: es privado.
 
 | Archivo | Qué es |
 |---|---|
-| `hyperpoc 0.4.4.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
-| `hyperpoc 0.4.4 - Manual.pdf` | El manual completo, 73 páginas con capturas. |
-| `hyperpoc 0.4.4.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
+| `hyperpoc 0.4.5.exe` | El instalador. Sirve para **instalar, reparar y desinstalar**. Es lo único que hay que ejecutar. |
+| `hyperpoc 0.4.5 - Manual.pdf` | El manual completo, 73 páginas con capturas. |
+| `hyperpoc 0.4.5.zip` | Los dos anteriores juntos, más un README con las instrucciones. |
 
 **SHA256 del instalador**
 
 ```
-AF62E646BAA837D2B4F566E2CDABE614F72B8998EA4DC74EDCA96EE197656550
+79359B20F60783BE6ADB8F695CC673D64FCF14E245BDC119243804C5C86E3507
 ```
 
 Compruébalo antes de ejecutarlo, en una ventana de comandos y en la carpeta donde lo hayas
 dejado:
 
 ```
-certutil -hashfile "hyperpoc 0.4.4.exe" SHA256
+certutil -hashfile "hyperpoc 0.4.5.exe" SHA256
 ```
 
 Tiene que dar exactamente ese número. Si no coincide, el archivo no es el que salió de aquí:
@@ -51,7 +51,7 @@ bórralo y vuelve a descargarlo.
 ## Instalar
 
 1. **Cierra NinjaTrader.**
-2. Doble clic en `hyperpoc 0.4.4.exe`. Windows mostrará una pantalla azul porque el archivo no
+2. Doble clic en `hyperpoc 0.4.5.exe`. Windows mostrará una pantalla azul porque el archivo no
    está firmado con un certificado comercial: *Más información* → *Ejecutar de todas formas*.
    Pedirá permisos de administrador **una vez**.
 3. Abre NinjaTrader. Cuando pregunte si autoriza los complementos, responde **Sí**.
@@ -78,50 +78,45 @@ Todo lo demás —campo por campo, ventana por ventana— está en el manual.
 - Las API wallets de Hyperliquid **caducan**. El programa te dice cuánto les queda cada vez que
   conectas.
 
-## Novedades de la 0.4.4
+## Novedades de la 0.4.5
 
 ```
-0.4.4 Beta  (17/09/2026)
-  TRES FALLOS QUE COSTABAN DINERO, Y UNA VENTANA QUE SE SALTABA TODAS LAS GUARDIAS.
+0.4.5 Beta  (17/09/2026)
+  TUS PROTECCIONES SE AJUSTAN OCHO VECES MAS RAPIDO DESPUES DE UN PARCIAL, Y LA CARRERA DE
+  LAS ATM SE HA PODIDO PROBAR POR FIN.
 
-  UNA ORDEN A MEDIO LLENAR YA NO TE RECONSTRUYE LA PANTALLA. Es el peor de los tres. El
-  vigilante que compara tus ordenes con las de Hyperliquid no miraba las ordenes A MEDIO
-  EJECUTAR: para el, esa limite tuya llena por la mitad sencillamente no existia. Pero en
-  Hyperliquid si existe, con el resto descansando. Asi que la daba por "una orden que
-  Hyperliquid tiene y NinjaTrader no enseña" y, al minuto, RECONSTRUIA EL SIMULADOR ENTERO:
-  cancelaba y recreaba todas tus ordenes, con ese momento en el que tus protecciones no
-  estan en pantalla. Por una orden a medio llenar -- que, como dijo un betatester, es una
-  cosa bastante comun. Ahora cuenta como lo que es: una orden.
+  DE 24 SEGUNDOS A 3. Cuando sacas un trozo de tu posicion, el stop y el objetivo que quedan
+  son mas grandes que lo que te queda abierto, y el programa los recorta solo. Ese recorte
+  tardaba hasta 24 segundos, y el motivo era que habia heredado una espera que no le tocaba:
+  el vigilante que compara tus ordenes con Hyperliquid espera 20 segundos despues de cada
+  envio, porque mover una orden alli la cancela y crea otra, y ese viaje puede durar. Pero el
+  recorte no compara nada con Hyperliquid: compara dos numeros de NinjaTrader, el tamaño de
+  tu posicion y el de tu orden, y ninguno de los dos depende de lo que este viajando.
 
-  UNA SALIDA YA NO PUEDE CONVERTIRSE EN UNA ENTRADA. Cuando el motor no conseguia calcular
-  el tamaño de una salida contra tu posicion real, se limitaba a mandarla por el camino
-  normal -- que no lleva la marca de "esto solo puede reducir". Resultado: en vez de cerrar,
-  ABRIA. Pasaba en tres sitios, y en los tres Hyperliquid habia contestado con claridad:
-  cuando alli ya no hay posicion (abria una nueva desde cero), cuando la posicion va al
-  reves de lo que cree NinjaTrader (la agrandaba en vez de cerrarla), y cuando el trozo que
-  pedias es mas pequeño que el minimo del activo (mandaba mucho mas de lo que querias sacar).
-  Ahora esos tres casos se contestan con un rechazo claro y NO se manda nada. Si el motor
-  simplemente NO PUEDE leer tu posicion, todo sigue como antes: no poder leer no es lo mismo
-  que no haber, y quedarse sin poder salir del mercado seria peor.
+  En Hyperliquid esas protecciones son reduce_only y nunca pudieron hacer daño --alli solo
+  cerrarian lo que hay--. El riesgo estaba en el simulador de NinjaTrader: si el stop saltaba
+  en ese hueco, vendia de mas y te dejaba la posicion del reves. Justo cuando el mercado
+  corre, que es cuando un stop salta despues de un parcial. Medido antes y despues con la
+  misma secuencia: 24 segundos antes, 3 ahora.
 
-  LA VENTANA "HYPERLIQUID TRADER" PASA POR LAS MISMAS REGLAS QUE EL GRAFICO. Esa ventana
-  habla con Hyperliquid directamente, que es lo que la hace util para operar sin grafico --
-  y era tambien lo que la dejaba fuera de todos los controles. Se podia abrir posicion desde
-  ella con la licencia caducada mientras el Chart Trader estaba en solo lectura. Ahora se
-  comprueba igual, con la misma excepcion de siempre: CERRAR y CANCELAR no se frenan nunca.
-  Ademas el tamaño que escribes ya se valida como numero antes de salir, y el rotulo dice lo
-  que hacia falta decir: ahi el tamaño va en CRIPTO (0,001 BTC), no en dolares como en el
-  grafico. Es el unico sitio del programa donde conviven las dos unidades.
+  LA CARRERA DE LAS ATM, PROBADA POR PRIMERA VEZ. Era el unico caso de la lista de pruebas
+  que se daba por imposible de provocar. Una estrategia ATM coloca el stop y el objetivo en el
+  MISMO instante en que se llena la entrada, y en ese instante la posicion todavia se esta
+  actualizando: las protecciones se calculaban contra una posicion a medio hacer.
 
-  Y LO QUE VIAJA AL MOVER UNA ORDEN MEDIO EJECUTADA queda comprobado de forma permanente.
-  Ese arreglo entro en la 0.4.2 y no se habia podido ejercer nunca: para que el simulador
-  deje una orden a medias, la orden tiene que ser mas grande que el volumen que imprime el
-  mercado, y con ordenes de 36 $ cualquier operacion de BTC la cubre entera. Con los 30.000 $
-  del betatester es el caso normal. Ahora esa cuenta se comprueba en seco, caso por caso.
+  Ahora se provoca a voluntad, y se ha visto el hueco con los ojos: al calcular las
+  protecciones, NinjaTrader decia que la posicion era de 1 dolar; al enviarlas, de 36. Una
+  treintaiseisava parte. El arreglo que tapa eso --mirar la posicion dos veces, al calcular y
+  al enviar-- estaba puesto desde la 0.4.2 y nunca se habia podido ejercer. Funciona: las dos
+  protecciones llegaron a Hyperliquid del tamaño exacto de la posicion, las dos sin poder
+  abrir nada, y atadas entre si como deben.
 
-  Comprobado con dinero real: los avisos de "no se ha podido cancelar", "no se ha movido la
-  orden" y "el motor lleva la configuracion de antes" se han provocado a proposito y los tres
-  avisan. 149 comprobaciones automaticas sin fallos.
+  Y encadenado con lo anterior: sacar un parcial justo despues de esa carrera deja las dos
+  protecciones en el tamaño de lo que queda, en Hyperliquid y en el grafico. Las dos cosas
+  que mas se piden juntas, probadas juntas.
+
+  Estas dos comprobaciones se han añadido al recorrido completo, asi que se repiten en cada
+  version a partir de ahora.
 ```
 
 ---
